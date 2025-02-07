@@ -101,5 +101,15 @@ body {
 }
 
 .modal__button {
+    min-width: 50px;
     cursor: pointer;
+}
+
+.modal__button:hover {
+    box-shadow: 0 0 0 1px var(--text-color);
+}
+
+.modal__confirm-button {
+    background-color: #eee;
+    border: 1px solid #eee;
 }
