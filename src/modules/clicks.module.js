@@ -8,6 +8,17 @@ export class ClicksModule extends Module {
     }    
 
     trigger() {
-        createTimer(10, this.timerContainer);
+        let countClick = 0;
+
+        const handleClick = () => {
+            countClick++;
+        };
+
+        document.addEventListener('click', handleClick);
+
+        createTimer(10, this.timerContainer, () => {
+            document.removeEventListener('click', handleClick);
+            alert(countClick);
+        });
     };
 }
