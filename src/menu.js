@@ -53,8 +53,15 @@ export default class ContextMenu extends Menu {
     }
 
     clickHeandler(event) {
-        if (event.target.offsetParent === this.el) {
-            console.log('!');
+        if (event.target.offsetParent !== this.el) {
+            return;
         };
+
+        const module = this.state.modules.find((module) => {
+            return module.type === event.target.dataset.type;
+        })
+
+        module.trigger();
+        this.close();
     }
 }
