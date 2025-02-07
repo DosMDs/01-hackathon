@@ -13,3 +13,22 @@ export function showModal(title, content = '') {
   const modal = new Modal();
   modal.open(title, content);
 }
+
+export function createTimer(time) {
+  const timerContainer = document.createElement('div');
+  const timerTextHTML = document.createElement('h3');
+
+  const body = document.querySelector('body');
+  timerContainer.prepend(timerTextHTML);
+  body.prepend(timerContainer);
+
+  const timer = setInterval(() => {
+      if(time === 0){
+          clearInterval(timer);
+          timerContainer.remove();
+      } else {
+          timerTextHTML.textContent = time;
+          time--;
+      }
+  }, 1000)
+}
