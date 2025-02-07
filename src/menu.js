@@ -35,11 +35,14 @@ export default class ContextMenu extends Menu {
         this.state.isOpen = false;
     }
     
-    add(module) {
-        if (!module instanceof Module) {
+    add(newModule) {
+        if (!newModule instanceof Module) {
             return;
         }
-        this.state.modules.push(module);
+        if (this.state.modules.find(module => module.type === newModule.type)) {
+            return;
+        }
+        this.state.modules.push(newModule);
     }
 
     contextmenuHeandler(event) {
