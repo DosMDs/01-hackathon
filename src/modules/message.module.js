@@ -11,13 +11,19 @@ export class MessageModule extends Module {
 
     createMessageBlock(message, position, seconds) {
         const element = this.createDivElement(this.createSpanElement(message), position);
-
         document.body.append(element);
 
+        this.deleteMessageBlock(element, seconds);
+    }
 
+    deleteMessageBlock(element, seconds) {
         setTimeout(() => {
-            element.remove();
-        }, seconds * 1000);
+            element.classList.add('delete-block');
+
+            setTimeout(() => {
+                element.remove();
+            }, seconds * 1000);
+        }, 1000);
     }
 
     createDivElement(spanElement, position) {
