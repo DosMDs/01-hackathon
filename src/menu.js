@@ -1,19 +1,19 @@
-import { Module } from './core/module';
+import {Module} from './core/module';
 import {Menu} from './core/menu'
 
 export default class ContextMenu extends Menu {
     constructor() {
         super('#menu');
-        
+
         this.state = {
             modules: [],
             mouseX: 0,
             mouseY: 0,
             isOpen: false
         };
-        
-        this.el.addEventListener('click', this.clickHeandler.bind(this));
-        document.addEventListener('contextmenu', this.contextmenuHeandler.bind(this));
+
+        this.el.addEventListener('click', this.clickHandler.bind(this));
+        document.addEventListener('contextmenu', this.contextmenuHandler.bind(this));
     }
 
     open() {
@@ -24,8 +24,7 @@ export default class ContextMenu extends Menu {
         this.el.style.left = `${this.state.mouseX}px`;
         this.el.style.top = `${this.state.mouseY}px`;
 
-        const modules = this.state.modules.map(module => module.toHTML()).join();
-        this.el.innerHTML = modules;
+        this.el.innerHTML = this.state.modules.map(module => module.toHTML()).join("");
         this.el.style.display = 'block';
         this.state.isOpen = true;
     }
@@ -34,7 +33,7 @@ export default class ContextMenu extends Menu {
         this.el.style.display = 'none';
         this.state.isOpen = false;
     }
-    
+
     add(newModule) {
         if (!newModule instanceof Module) {
             return;
@@ -45,7 +44,7 @@ export default class ContextMenu extends Menu {
         this.state.modules.push(newModule);
     }
 
-    contextmenuHeandler(event) {
+    contextmenuHandler(event) {
         event.preventDefault();
         this.state.mouseX = event.clientX;
         this.state.mouseY = event.clientY;
@@ -55,10 +54,10 @@ export default class ContextMenu extends Menu {
         this.open();
     }
 
-    clickHeandler(event) {
+    clickHandler(event) {
         if (event.target.offsetParent !== this.el) {
             return;
-        };
+        }
 
         const module = this.state.modules.find((module) => {
             return module.type === event.target.dataset.type;
