@@ -121,15 +121,19 @@ body {
 .block--message {
     position: absolute;
     display: flex;
-    padding: 0 5px;
-    max-width: 500px;
+    padding: 10px 5px;
     text-align: center;
-    width: auto;
-    height: 50px;
+    width: 350px;
+    height: auto;
     background-color: rgba(246, 246, 246, 0.35);
     border-radius: 5px;
     border: 1px solid #9c9c9c;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 6px 6px rgba(0, 0, 0, 0.20);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .block--delete {

@@ -10,7 +10,7 @@ export class MessageModule extends Module {
         this.createMessageBlock()
     }
 
-    createMessageBlock(message = 'Lorem ipsum dolor sit amet', position = 'lb', seconds = 3) {
+    createMessageBlock(message = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, suscipit!', position = 'lb', seconds = 3) {
         const element = this.createDivElement(this.createSpanElement(message), position);
         document.body.append(element);
 
