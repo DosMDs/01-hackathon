@@ -113,3 +113,17 @@ body {
     background-color: #eee;
     border: 1px solid #eee;
 }
+
+.message-box {
+    display: flex;
+    width: 200px;
+    height: 50px;
+    background-color: rgba(246, 246, 246, 0.35);
+    border-radius: 5px;
+    border: 1px solid #9c9c9c;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.20), 0 6px 6px rgba(0,0,0,0.20);
+}
+
+.message-box span {
+    margin: auto;
+}
