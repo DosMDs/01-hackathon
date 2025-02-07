@@ -17,7 +17,7 @@ body {
 .menu {
     position: fixed;
     z-index: 1000;
-    width: 150px;
+    width: 250px;
     background: #1b1a1a;
     border-radius: 5px;
     display: none;
@@ -123,7 +123,7 @@ body {
     border-radius: 5px;
     border: 1px solid #9c9c9c;
     box-shadow: 0 10px 20px rgba(0,0,0,0.20), 0 6px 6px rgba(0,0,0,0.20);
-    transition: 1000ms opacity ease-in;
+    transition: 1000ms all ease-in;
 }
 
 .message-box span {

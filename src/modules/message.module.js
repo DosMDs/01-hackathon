@@ -17,8 +17,12 @@ export class MessageModule extends Module {
     }
 
     deleteMessageBlock(element, seconds) {
+
+
         setTimeout(() => {
             element.classList.add('delete-block');
+            if (element.classList.contains('block_rt') || element.classList.contains('block_lt')) element.style.top = '0';
+            if (element.classList.contains('block_rb') || element.classList.contains('block_lb')) element.style.bottom = '0';
 
             setTimeout(() => {
                 element.remove();
