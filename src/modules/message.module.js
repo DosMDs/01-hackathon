@@ -6,15 +6,28 @@ export class MessageModule extends Module {
     }
 
     trigger() {
-        const div = document.createElement('div');
-        div.className = 'message-box';
-
-        const span = document.createElement('span');
-        span.innerText = 'Some message text';
-
-        div.appendChild(span);
-
-        document.body.appendChild(div);
+        this.createMessageBlock('Hello World!')
     }
 
+    createMessageBlock(message) {
+        document.body.append(this.createDivElement(this.createSpanElement(message)));
+    }
+
+    createDivElement(spanElement) {
+        const divElement = document.createElement('div');
+        divElement.className = 'message-box';
+
+        divElement.appendChild(spanElement);
+        return divElement;
+    }
+
+    createSpanElement(message) {
+        if (!message) return;
+
+        const spanElement = document.createElement('span');
+        spanElement.className = 'message-box__message-text';
+        spanElement.innerText = message;
+
+        return spanElement;
+    }
 }
