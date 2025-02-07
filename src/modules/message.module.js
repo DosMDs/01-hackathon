@@ -19,7 +19,7 @@ export class MessageModule extends Module {
 
     createDivElement(spanElement, position) {
         const divElement = document.createElement('div');
-        divElement.className = 'message-box';
+        divElement.className = 'block block--message';
         setPositionElement(divElement, position);
 
         divElement.appendChild(spanElement);
@@ -30,7 +30,7 @@ export class MessageModule extends Module {
         if (!message) return;
 
         const spanElement = document.createElement('span');
-        spanElement.className = 'message-box__message-text';
+        spanElement.className = 'block__span';
         spanElement.innerText = message;
 
         return spanElement;

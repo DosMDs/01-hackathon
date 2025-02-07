@@ -17,37 +17,37 @@ export function showModal(title, content = '') {
 /* Удаление элемента */
 export function deleteMessageBlock(element, seconds) {
     setTimeout(() => {
-        element.classList.add('delete-block');
-        if (element.classList.contains('block_rt') || element.classList.contains('block_lt')) element.style.top = '0';
-        if (element.classList.contains('block_rb') || element.classList.contains('block_lb')) element.style.bottom = '0';
+        element.classList.add('block--delete');
+        if (element.classList.contains('block--rt') || element.classList.contains('block--lt')) element.style.top = '0';
+        if (element.classList.contains('block--rb') || element.classList.contains('block--lb')) element.style.bottom = '0';
 
         setTimeout(() => {
             element.remove();
-        }, seconds * 1000);
-    }, 1000);
+        }, (seconds * 1000) + 1000);
+    }, seconds * 1000);
 }
 
 /* Задаем позицию элементу */
 export function setPositionElement(element, position) {
     switch (position) {
         case 'lt': // left-top
-            element.classList.add('block_lt')
+            element.classList.add('block--lt')
             break;
 
         case 'rt': // right-top
-            element.classList.add('block_rt')
+            element.classList.add('block--rt')
             break;
 
         case 'rb': // right-bottom
-            element.classList.add('block_rb')
+            element.classList.add('block--rb')
             break;
 
         case 'lb': // left-bottom
-            element.classList.add('block_lb')
+            element.classList.add('block--lb')
             break;
 
         default:
-            element.classList.add('block_lb')
+            element.classList.add('block--lb')
             break;
     }
 }

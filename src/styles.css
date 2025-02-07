@@ -114,7 +114,11 @@ body {
     border: 1px solid #eee;
 }
 
-.message-box {
+.block {
+    transition: 1000ms all ease-in;
+}
+
+.block--message {
     position: absolute;
     display: flex;
     width: 200px;
@@ -122,45 +126,40 @@ body {
     background-color: rgba(246, 246, 246, 0.35);
     border-radius: 5px;
     border: 1px solid #9c9c9c;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.20), 0 6px 6px rgba(0,0,0,0.20);
-    transition: 1000ms all ease-in;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 6px 6px rgba(0, 0, 0, 0.20);
 }
 
-.message-box span {
+.block--delete {
+    opacity: 0;
+}
+
+.block__span {
     margin: auto;
-}
-
-.block_rb {
-    bottom: 50px;
-    right: 50px;
 }
 
 /* Позиции для абсолютных элементов */
 
 /* right-bottom */
-.block_rb {
+.block--rb {
     bottom: 50px;
     right: 50px;
 }
 
 /* right-top */
-.block_rt {
+.block--rt {
     top: 50px;
     right: 50px;
 }
 
 /* left-bottom */
-.block_lb {
+.block--lb {
     bottom: 50px;
     left: 50px;
 }
 
 /* left-top */
-.block_lt {
+.block--lt {
     top: 50px;
     left: 50px;
 }
 
-.delete-block {
-    opacity: 0;
-}
