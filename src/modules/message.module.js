@@ -2,15 +2,22 @@ import {Module} from '../core/module'
 
 export class MessageModule extends Module {
     constructor() {
-        super("message", "Создать сообщение");
+        super("message", "Вызвать сообщение");
     }
 
     trigger() {
-        this.createMessageBlock('Hello World!', 'rt')
+        this.createMessageBlock('Hello World!', 'lb', 3)
     }
 
-    createMessageBlock(message, position) {
-        document.body.append(this.createDivElement(this.createSpanElement(message), position));
+    createMessageBlock(message, position, seconds) {
+        const element = this.createDivElement(this.createSpanElement(message), position);
+
+        document.body.append(element);
+
+
+        setTimeout(() => {
+            element.remove();
+        }, seconds * 1000);
     }
 
     createDivElement(spanElement, position) {
