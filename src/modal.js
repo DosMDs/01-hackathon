@@ -1,5 +1,9 @@
 class Modal {
-  constructor() {
+  constructor(isQuestion = false) {
+    this.state = {
+      isQuestion: isQuestion
+    };
+
     this.modal = document.querySelector(".modal-overlay");
     this.modalTitle = document.querySelector(".modal__title");
     this.modalBody = document.querySelector(".modal__body");
@@ -15,13 +19,13 @@ class Modal {
   open(title, content = "") {
     this.modalTitle.innerHTML = title;
     this.modalBody.innerHTML = content;
-    this.modal.style.display = "block";
+    this.modal.classList.toggle('modal-overlay_hidden');
   }
 
   close() {
-    this.modal.style.display = "none";
-    this.modalTitle.innerHTML = "";
-    this.modalBody.innerHTML = "";
+    this.modal.classList.toggle('modal-overlay_hidden');
+    this.modalTitle.innerHTML = '';
+    this.modalBody.innerHTML = '';
   }
 }
 
