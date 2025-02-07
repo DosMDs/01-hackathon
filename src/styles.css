@@ -115,6 +115,7 @@ body {
 }
 
 .message-box {
+    position: absolute;
     display: flex;
     width: 200px;
     height: 50px;
@@ -126,4 +127,35 @@ body {
 
 .message-box span {
     margin: auto;
+}
+
+.block_rb {
+    bottom: 50px;
+    right: 50px;
+}
+
+/* Позиции для абсолютных элементов */
+
+/* right-bottom */
+.block_rb {
+    bottom: 50px;
+    right: 50px;
+}
+
+/* right-top */
+.block_rt {
+    top: 50px;
+    right: 50px;
+}
+
+/* left-bottom */
+.block_lb {
+    bottom: 50px;
+    left: 50px;
+}
+
+/* left-top */
+.block_lt {
+    top: 50px;
+    left: 50px;
 }

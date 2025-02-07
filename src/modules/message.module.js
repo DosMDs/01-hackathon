@@ -6,16 +6,17 @@ export class MessageModule extends Module {
     }
 
     trigger() {
-        this.createMessageBlock('Hello World!')
+        this.createMessageBlock('Hello World!', 'rt')
     }
 
-    createMessageBlock(message) {
-        document.body.append(this.createDivElement(this.createSpanElement(message)));
+    createMessageBlock(message, position) {
+        document.body.append(this.createDivElement(this.createSpanElement(message), position));
     }
 
-    createDivElement(spanElement) {
+    createDivElement(spanElement, position) {
         const divElement = document.createElement('div');
         divElement.className = 'message-box';
+        this._setPositionElement(divElement, position);
 
         divElement.appendChild(spanElement);
         return divElement;
@@ -30,4 +31,30 @@ export class MessageModule extends Module {
 
         return spanElement;
     }
+
+
+    _setPositionElement(element, position) {
+        switch (position) {
+            case 'lt': // left-top
+                element.classList.add('block_lt')
+                break;
+
+            case 'rt': // right-top
+                element.classList.add('block_rt')
+                break;
+
+            case 'rb': // right-bottom
+                element.classList.add('block_rb')
+                break;
+
+            case 'lb': // left-bottom
+                element.classList.add('block_lb')
+                break;
+
+            default:
+                element.classList.add('block_lb')
+                break;
+        }
+    }
+
 }
