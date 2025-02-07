@@ -14,8 +14,11 @@ export function showModal(title, content = '') {
   modal.open(title, content);
 }
 
-export function createTimer(time) {
-  const timerContainer = document.createElement('div');
+export function createTimer(time, timerContainer = null, finalFunction = null) {
+  if(!timerContainer){
+    return
+  }
+
   const timerTextHTML = document.createElement('h3');
 
   const body = document.querySelector('body');
@@ -26,6 +29,10 @@ export function createTimer(time) {
       if(time === 0){
           clearInterval(timer);
           timerContainer.remove();
+
+          if (finalFunction && typeof finalFunction === 'function'){
+            finalFunction();
+          }
       } else {
           timerTextHTML.textContent = time;
           time--;
