@@ -1,6 +1,7 @@
 class Modal {
-  constructor(isQuestion = false) {
+  constructor(isInput = false, isQuestion = false) {
     this.state = {
+      isInput: isInput,
       isQuestion: isQuestion
     };
 
