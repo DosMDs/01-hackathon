@@ -40,6 +40,7 @@ class Modal {
     this.modal.classList.toggle('modal-overlay_hidden');
     this.modalTitle.innerHTML = '';
     this.modalBody.innerHTML = '';
+    this.modalButtons.replaceChildren();
   }
 }
 
