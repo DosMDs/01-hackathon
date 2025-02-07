@@ -9,7 +9,7 @@ export function getRandomColor() {
   return color;
 }
 
-export function shodModal(title, content = '') {
+export function showModal(title, content = '') {
   const modal = new Modal();
   modal.open(title, content);
 }
