@@ -7,10 +7,10 @@ export class MessageModule extends Module {
     }
 
     trigger() {
-        this.createMessageBlock('Hello World!', 'lb', 3)
+        this.createMessageBlock()
     }
 
-    createMessageBlock(message, position, seconds) {
+    createMessageBlock(message = 'Lorem ipsum dolor sit amet', position = 'lb', seconds = 3) {
         const element = this.createDivElement(this.createSpanElement(message), position);
         document.body.append(element);
 
@@ -27,8 +27,6 @@ export class MessageModule extends Module {
     }
 
     createSpanElement(message) {
-        if (!message) return;
-
         const spanElement = document.createElement('span');
         spanElement.className = 'block__span';
         spanElement.innerText = message;

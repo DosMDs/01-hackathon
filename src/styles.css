@@ -121,7 +121,10 @@ body {
 .block--message {
     position: absolute;
     display: flex;
-    width: 200px;
+    padding: 0 5px;
+    max-width: 500px;
+    text-align: center;
+    width: auto;
     height: 50px;
     background-color: rgba(246, 246, 246, 0.35);
     border-radius: 5px;
