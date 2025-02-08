@@ -83,7 +83,6 @@ export class MessageModule extends Module {
 
 
         setTimeout(() => {
-            element.remove();
 
             if (this.messages.length > 0) {
                 const lastMessage = this.messages[this.messages.length - 1].getBoundingClientRect().top;
@@ -94,6 +93,8 @@ export class MessageModule extends Module {
                     message.style.top = nextTopPosition;
                 });
             }
-        }, 1000);
+
+            element.remove();
+        }, 777);
     }
 }
