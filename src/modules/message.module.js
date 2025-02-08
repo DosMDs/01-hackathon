@@ -27,7 +27,7 @@ export class MessageModule extends Module {
         this.messages.push(element);
 
         setTimeout(() => {
-            this.deleteMessageBlock(element, seconds);
+            this.deleteMessageBlock(element);
         }, seconds * 1000)
     }
 
@@ -75,23 +75,25 @@ export class MessageModule extends Module {
         return divElement;
     }
 
-    deleteMessageBlock(element, seconds) {
+    deleteMessageBlock(element) {
         element.classList.add('block--delete');
         if (element.classList.contains('block--rt') || element.classList.contains('block--lt')) element.style.top = '0';
         if (element.classList.contains('block--rb') || element.classList.contains('block--lb')) element.style.bottom = '0';
         this.messages.splice(0, 1);
 
-        if (this.messages.length > 0) {
-            setTimeout(() => {
-                this.messages.forEach(message => {
-                    message.style.top = message.getBoundingClientRect().top + 135 + 'px';
-                });
-            }, 1000);
-        }
-
 
         setTimeout(() => {
             element.remove();
+
+            if (this.messages.length > 0) {
+                const lastMessage = this.messages[this.messages.length - 1].getBoundingClientRect().top;
+                let nextTopPosition = lastMessage + 135 + 'px';
+
+                this.messages.forEach(message => {
+                    nextTopPosition = parseInt(message.style.top) + 135 + 'px';
+                    message.style.top = nextTopPosition;
+                });
+            }
         }, 1000);
     }
 }
