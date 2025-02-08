@@ -21,7 +21,7 @@ export class MessageModule extends Module {
         return this.quotes[Math.floor(Math.random() * this.quotes.length)];
     }
 
-    createMessageBlock(obj, position = 'lt', seconds = 7) {
+    createMessageBlock(obj, position = 'lb', seconds = 7) {
         const element = this.createDivElement(obj, position);
         document.body.append(element);
         this.messages.push(element);
