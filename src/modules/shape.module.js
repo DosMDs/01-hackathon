@@ -5,7 +5,6 @@ import { getRandomColor } from "../utils";
 export default class ShapeModule extends Module {
     constructor() {
         super('shape', 'Создать фигуру');
-
         this.$canvas = document.createElement('canvas');
         this.$canvas.width = window.innerWidth;
         this.$canvas.height = window.innerHeight;
@@ -13,57 +12,66 @@ export default class ShapeModule extends Module {
         document.body.append(this.$canvas);
     }
 
-    polygon({ x0, y0, w, h }, n, d, c) {
+    polygon({ x0, y0, w, h } = this.createNewBox(), n = random(3, 7), d = random(0, 360), c = getRandomColor()) {
+        this.ctx.save();
         const x_c = x0 + w / 2;
         const y_c = y0 + h / 2;
-
-       
-        this.ctx.setTransform(1, 0, 0, 1, x_c, y_c);
-        this.ctx.rotate(d * Math.PI / 180);
-
         this.ctx.beginPath();
-        this.ctx.moveTo(w * Math.cos(0) / 2, h * Math.sin(0) / 2);
+        this.ctx.moveTo(x_c + w * Math.cos(d * Math.PI / 180) / 2, y_c + h * Math.sin(d * Math.PI / 180) / 2);
         for (let i = 1; i <= n; i += 1) {
-            this.ctx.lineTo(w * Math.cos(i * 2 * Math.PI / n) / 2, h * Math.sin(i * 2 * Math.PI / n) / 2);
+            this.ctx.lineTo(x_c + w * Math.cos(d * Math.PI / 180 + i * 2 * Math.PI / n) / 2, y_c + h * Math.sin(d * Math.PI / 180 + i * 2 * Math.PI / n) / 2);
         }
-
+        this.ctx.closePath();
         this.ctx.fillStyle = c;
         this.ctx.fill();
+        this.ctx.restore();
     }
 
-    ellipse({ x0, y0, w, h }, r, d, c) {
+    ellipse({ x0, y0, w, h } = this.createNewBox(), r = random(2, 10), d = random(0, 360), c = getRandomColor()) {
+        this.ctx.save();
         const x_c = x0 + w / 2;
         const y_c = y0 + h / 2;
-        console.log(x_c, y_c, w, h);
-        
-
-        
-        //this.ctx.setTransform(1, 0, 0, 1, x_c, y_c);
-        //this.ctx.rotate(d * Math.PI / 180);
         this.ctx.beginPath();
         this.ctx.ellipse(x_c, y_c, w / 2, w * r / 20, d * Math.PI / 180, 0, 2 * Math.PI);
-
+        this.ctx.closePath();
         this.ctx.fillStyle = c;
         this.ctx.fill();
+        this.ctx.restore();
 
     }
 
-    newBox() {
+    star({ x0, y0, w, h } = this.createNewBox(), n = random(3, 10), k = random(1, 8) / 10, c = getRandomColor()) {
+        this.ctx.save();
+        const x_c = x0 + w / 2;
+        const y_c = y0 + h / 2;
+        this.ctx.beginPath();
+        this.ctx.translate(x_c, y_c);
+        this.ctx.moveTo(0, - w / 2);
+        for (let i = 0; i < n; i++) {
+            this.ctx.rotate(Math.PI / n);
+            this.ctx.lineTo(0, - (w / 2 * k));
+            this.ctx.rotate(Math.PI / n);
+            this.ctx.lineTo(0, - w / 2);
+        }
+        this.ctx.closePath();
+        this.ctx.fillStyle = c;
+        this.ctx.fill();
+        this.ctx.restore();
+    }
+
+    createNewBox() {
         const newBox = {
-            w: random(50, 300),
+            w: random(100, 300),
         };
         newBox.h = newBox.w;
-        newBox.x0 = random(0, window.innerWidth - newBox.w);
-        newBox.y0 = random(0, window.innerHeight - newBox.h);
-
+        newBox.x0 = random(0, this.$canvas.width - newBox.w);
+        newBox.y0 = random(0, this.$canvas.height - newBox.h);
         return newBox;
     }
 
     trigger() {
-        const func = [this.ellipse, this.polygon]
+        const func = [this.polygon, this.ellipse, this.star]
         const randomElementIndex = Math.floor(Math.random() * func.length);
-
-        func[randomElementIndex].bind(this)(this.newBox(), random(3, 7), random(0, 360), getRandomColor());
-
+        func[randomElementIndex].bind(this)();
     }
 }
