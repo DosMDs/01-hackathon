@@ -1,20 +1,28 @@
-import {Module} from '../core/module'
-import {deleteMessageBlock, setPositionElement} from '../utils'
+import {Module} from '@/core/module'
+import {setPositionElement} from '@/utils'
+import {quotes} from '@/resources/data/quotes.json'
 
 export class MessageModule extends Module {
     constructor() {
         super("message", "Вызвать сообщение");
+
+        this.messages = []
     }
 
     trigger() {
-        this.createMessageBlock()
+        this.createMessageBlock(this.getRandomQuote())
     }
 
-    createMessageBlock(message = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, suscipit!', position = 'lb', seconds = 3) {
-        const element = this.createDivElement(this.createSpanElement(message), position);
-        document.body.append(element);
+    getRandomQuote() {
+        return quotes[Math.floor(Math.random() * quotes.length)];
+    }
 
-        deleteMessageBlock(element, seconds);
+    createMessageBlock(obj, position = 'lb', seconds = 3) {
+        const element = this.createDivElement(this.createSpanElement(obj.quote), position);
+        document.body.append(element);
+        this.messages.push(element);
+
+        this.deleteMessageBlock(element, seconds);
     }
 
     createDivElement(spanElement, position) {
@@ -32,5 +40,17 @@ export class MessageModule extends Module {
         spanElement.innerText = message;
 
         return spanElement;
+    }
+
+    deleteMessageBlock(element, seconds) {
+        setTimeout(() => {
+            element.classList.add('block--delete');
+            if (element.classList.contains('block--rt') || element.classList.contains('block--lt')) element.style.top = '0';
+            if (element.classList.contains('block--rb') || element.classList.contains('block--lb')) element.style.bottom = '0';
+
+            setTimeout(() => {
+                element.remove();
+            }, (seconds * 1000) + 1000);
+        }, seconds * 1000);
     }
 }
