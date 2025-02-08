@@ -1,6 +1,5 @@
 import { Module } from '../core/module'
-import { random } from '../utils'
-import { getRandomColor } from "../utils";
+import { random, getRandomColor } from '../utils'
 
 export default class ShapeModule extends Module {
     constructor() {
@@ -71,7 +70,6 @@ export default class ShapeModule extends Module {
 
     trigger() {
         const func = [this.polygon, this.ellipse, this.star]
-        const randomElementIndex = Math.floor(Math.random() * func.length);
-        func[randomElementIndex].bind(this)();
+        func[random(0, func.length)].bind(this)();
     }
 }
