@@ -26,7 +26,9 @@ export class MessageModule extends Module {
         document.body.append(element);
         this.messages.push(element);
 
-        this.deleteMessageBlock(element, seconds);
+        setTimeout(() => {
+            this.deleteMessageBlock(element, seconds);
+        }, seconds * 1000)
     }
 
     createDivElement(obj, position) {
@@ -74,22 +76,22 @@ export class MessageModule extends Module {
     }
 
     deleteMessageBlock(element, seconds) {
-        setTimeout(() => {
-            element.classList.add('block--delete');
-            if (element.classList.contains('block--rt') || element.classList.contains('block--lt')) element.style.top = '0';
-            if (element.classList.contains('block--rb') || element.classList.contains('block--lb')) element.style.bottom = '0';
-            this.messages.splice(0, 1);
+        element.classList.add('block--delete');
+        if (element.classList.contains('block--rt') || element.classList.contains('block--lt')) element.style.top = '0';
+        if (element.classList.contains('block--rb') || element.classList.contains('block--lb')) element.style.bottom = '0';
+        this.messages.splice(0, 1);
 
+        if (this.messages.length > 0) {
             setTimeout(() => {
                 this.messages.forEach(message => {
                     message.style.top = message.getBoundingClientRect().top + 135 + 'px';
                 });
             }, 1000);
+        }
 
 
-            setTimeout(() => {
-                element.remove();
-            }, (seconds * 1000) + 1000);
-        }, seconds * 1000);
+        setTimeout(() => {
+            element.remove();
+        }, 1000);
     }
 }
