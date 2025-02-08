@@ -21,8 +21,8 @@ class Modal {
     this.modalTitle.innerHTML = title;
     this.modalBody.innerHTML = content;
     this.modal.classList.toggle('modal-overlay_hidden');
-    if (this.state.isQuestion) {
-
+    if (this.state.isInput) {
+      this._addInput();
     } else {
       this._addOkBtn();
     }
@@ -35,6 +35,11 @@ class Modal {
     this.modalButtons.appendChild(buttonOK);
 
     buttonOK.addEventListener('click', (event) => this.close());
+  }
+
+  _addInput() {
+    const mainForm = document.createElement('form');
+    
   }
 
   close() {
