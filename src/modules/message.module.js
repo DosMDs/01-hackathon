@@ -56,14 +56,6 @@ export class MessageModule extends Module {
         return divElement;
     }
 
-    createSpanElement(message) {
-        const spanElement = document.createElement('span');
-        spanElement.className = 'block__span';
-        spanElement.innerText = message;
-
-        return spanElement;
-    }
-
     deleteMessageBlock(element, seconds) {
         setTimeout(() => {
             element.classList.add('block--delete');
