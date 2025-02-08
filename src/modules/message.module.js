@@ -36,7 +36,14 @@ export class MessageModule extends Module {
 
         if (this.messages.length > 0) {
             this.nextHeightForMessage = this.messages[this.messages.length - 1].getBoundingClientRect().top;
-            divElement.style.top = this.nextHeightForMessage - 135 + 'px'
+
+            if (divElement.classList.contains('block--rt') || divElement.classList.contains('block--lt')) {
+                divElement.style.top = this.nextHeightForMessage + 135 + 'px'
+            }
+            if (divElement.classList.contains('block--rb') || divElement.classList.contains('block--lb')) {
+                divElement.style.top = this.nextHeightForMessage - 135 + 'px'
+            }
+
         } else {
             this.nextHeightForMessage = null;
         }
@@ -75,6 +82,10 @@ export class MessageModule extends Module {
             setTimeout(() => {
                 this.messages.splice(element);
                 element.remove();
+
+                if (this.messages.length > 0) {
+                    console.log(this.messages)
+                }
             }, (seconds * 1000) + 1000);
         }, seconds * 1000);
     }
