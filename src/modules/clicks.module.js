@@ -3,32 +3,37 @@ import { createTimer } from '../utils'
 
 export class ClicksModule extends Module {
     constructor() {
-        super("clicks", "Подсчет кликов за определенное время");
+        super("clicks", "Подсчет кликов за 3 секунды");
+
+        this.state = {
+            countClick: 0,
+            oneClick: 0,
+            doubleClick: 0,
+            lastTimeClick: 0,
+            timeout: null
+        };
+
         this.timerContainer = document.createElement('div');
-        this.countClick = 0;
-        this.oneClick = 0;
-        this.doubleClick = 0;
-        this.lastTimeClick = 0;
+
         this.handleClick = (event) => {
             const now = Date.now();
 
             if(event.detail === 1){
-                if (this.timeout) {
-                    clearTimeout(this.timeout); 
+                if (this.state.timeout) {
+                    clearTimeout(this.state.timeout); 
                 }
 
-                this.timeout = setTimeout(() => {
-                    // Если прошло больше времени, считаем одиночным
-                    this.oneClick++;
+                this.state.timeout = setTimeout(() => {
+                    this.state.oneClick++;
                 }, 200);
             }
 
             if(event.detail === 2) {
-                this.doubleClick++;
-                clearTimeout(this.timeout)
+                this.state.doubleClick++;
+                clearTimeout(this.state.timeout)
             }
 
-            this.lastTimeClick = now;
+            this.state.lastTimeClick = now;
         };
     }    
     
@@ -41,15 +46,16 @@ export class ClicksModule extends Module {
 
         createTimer(3, this.timerContainer, () => {
             document.removeEventListener('click', this.handleClick);
-            this.countClick = this.oneClick + this.doubleClick;
-            alert(`Одиночных кликов: ${this.oneClick}, Дабл кликов: ${this.doubleClick}, Всего кликов: ${this.countClick}`);
+            this.state.countClick = this.state.oneClick + this.state.doubleClick;
+            alert(`Одиночных кликов: ${this.state.oneClick}, Дабл кликов: ${this.state.doubleClick}, Всего кликов: ${this.state.countClick}`);
         });
     };
 
     #reset() {
-        this.countClick = 0;
-        this.oneClick = 0;
-        this.doubleClick = 0;
-        this.lastTimeClick = 0;
+        this.state.countClick = 0;
+        this.state.oneClick = 0;
+        this.state.doubleClick = 0;
+        this.state.lastTimeClick = 0;
+        this.state.timeout = null;
     }
 }
