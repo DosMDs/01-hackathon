@@ -14,19 +14,6 @@ export function showModal(title, content = '') {
     modal.open(title, content);
 }
 
-/* Удаление элемента */
-export function deleteMessageBlock(element, seconds) {
-    setTimeout(() => {
-        element.classList.add('block--delete');
-        if (element.classList.contains('block--rt') || element.classList.contains('block--lt')) element.style.top = '0';
-        if (element.classList.contains('block--rb') || element.classList.contains('block--lb')) element.style.bottom = '0';
-
-        setTimeout(() => {
-            element.remove();
-        }, (seconds * 1000) + 1000);
-    }, seconds * 1000);
-}
-
 /* Задаем позицию элементу */
 export function setPositionElement(element, position) {
     switch (position) {
