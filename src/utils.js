@@ -14,7 +14,7 @@ export function showModal(title, content = '') {
   modal.open(title, content);
 }
 
-export function createTimer(time, timerContainer = null, finalFunction = null) {
+export function createTimer(time, timerContainer = undefined, finalFunction = undefined) {
   if(!timerContainer){
     return
   }
@@ -28,6 +28,7 @@ export function createTimer(time, timerContainer = null, finalFunction = null) {
   const timer = setInterval(() => {
       if(time === 0){
           clearInterval(timer);
+          timerTextHTML.remove();
           timerContainer.remove();
 
           if (finalFunction && typeof finalFunction === 'function'){
