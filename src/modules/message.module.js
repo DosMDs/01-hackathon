@@ -1,12 +1,15 @@
 import {Module} from '@/core/module'
 import {setPositionElement} from '@/utils'
-import {quotes} from '@/resources/data/quotes.json'
+import quotes from '@/resources/data/quotes.json'
+import statham from '@/resources/img/statham.jpg'
 
 export class MessageModule extends Module {
     constructor() {
         super("message", "Вызвать сообщение");
 
-        this.messages = []
+        this.quotes = quotes.quotes;
+        this.statham = statham;
+        this.messages = [];
     }
 
     trigger() {
@@ -14,23 +17,42 @@ export class MessageModule extends Module {
     }
 
     getRandomQuote() {
-        return quotes[Math.floor(Math.random() * quotes.length)];
+        return this.quotes[Math.floor(Math.random() * this.quotes.length)];
     }
 
-    createMessageBlock(obj, position = 'lb', seconds = 3) {
-        const element = this.createDivElement(this.createSpanElement(obj.quote), position);
+    createMessageBlock(obj, position = 'lb', seconds = 7) {
+        const element = this.createDivElement(obj, position);
         document.body.append(element);
         this.messages.push(element);
 
         this.deleteMessageBlock(element, seconds);
     }
 
-    createDivElement(spanElement, position) {
+    createDivElement(obj, position) {
         const divElement = document.createElement('div');
         divElement.className = 'block block--message';
         setPositionElement(divElement, position);
 
-        divElement.appendChild(spanElement);
+        const imgElement = document.createElement('img');
+        imgElement.className = 'block__img';
+        imgElement.src = this.statham;
+
+        const divSeparator = document.createElement('div');
+        divSeparator.className = 'block__vr';
+
+        const divContainer = document.createElement('div');
+        divContainer.className = 'block__container';
+
+        const h3Element = document.createElement('h3');
+        h3Element.className = 'block__h3';
+        h3Element.innerText = `Вам пишет: ${obj.author}`;
+
+        const spanElement = document.createElement('span');
+        spanElement.className = 'block__span';
+        spanElement.innerText = obj.quote;
+
+        divContainer.append(h3Element, spanElement);
+        divElement.append(imgElement, divSeparator, divContainer);
         return divElement;
     }
 

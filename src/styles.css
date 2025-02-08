@@ -122,7 +122,6 @@ body {
     position: absolute;
     display: flex;
     padding: 10px 5px;
-    text-align: center;
     width: 350px;
     height: auto;
     background-color: rgba(246, 246, 246, 0.35);
@@ -140,8 +139,45 @@ body {
     opacity: 0;
 }
 
+/*.block__span {*/
+/*    margin: auto;*/
+/*}*/
+
+.block--message {
+    display: flex;
+    padding: 10px;
+    height: 125px;
+}
+
+.block__img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.block__vr {
+    margin: 0 15px;
+    width: 1px;
+    height: 100%;
+    background-color: lightgray;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 6px 6px rgba(0, 0, 0, 0.20);
+}
+
+.block__h3 {
+    font-size: 0.9rem;
+}
+
+.block_container {
+    height: 100%;
+}
+
+.block__h3 {
+    height: 25%;
+}
+
 .block__span {
-    margin: auto;
+    height: 75%;
+    text-align: left;
 }
 
 /* Позиции для абсолютных элементов */
