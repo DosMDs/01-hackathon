@@ -13,3 +13,29 @@ export function showModal(title, content = '') {
   const modal = new Modal();
   modal.open(title, content);
 }
+
+export function createTimer(time, timerContainer = null, finalFunction = null) {
+  if(!timerContainer){
+    return
+  }
+
+  const timerTextHTML = document.createElement('h3');
+
+  const body = document.querySelector('body');
+  timerContainer.prepend(timerTextHTML);
+  body.prepend(timerContainer);
+
+  const timer = setInterval(() => {
+      if(time === 0){
+          clearInterval(timer);
+          timerContainer.remove();
+
+          if (finalFunction && typeof finalFunction === 'function'){
+            finalFunction();
+          }
+      } else {
+          timerTextHTML.textContent = time;
+          time--;
+      }
+  }, 1000)
+}
