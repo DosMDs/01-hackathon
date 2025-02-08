@@ -115,7 +115,7 @@ body {
 }
 
 .block {
-    transition: 1000ms all ease-in;
+    transition: 1s all ease-in;
 }
 
 .block--message {
