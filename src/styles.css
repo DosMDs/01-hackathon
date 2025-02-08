@@ -163,15 +163,12 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 6px 6px rgba(0, 0, 0, 0.20);
 }
 
-.block__h3 {
-    font-size: 0.9rem;
-}
-
 .block_container {
     height: 100%;
 }
 
 .block__h3 {
+    font-size: 0.9rem;
     height: 20%;
 }
 

@@ -10,6 +10,7 @@ export class MessageModule extends Module {
         this.quotes = quotes.quotes;
         this.statham = statham;
         this.messages = [];
+        this.nextHeightForMessage = null;
     }
 
     trigger() {
@@ -20,7 +21,7 @@ export class MessageModule extends Module {
         return this.quotes[Math.floor(Math.random() * this.quotes.length)];
     }
 
-    createMessageBlock(obj, position = 'lb', seconds = 7) {
+    createMessageBlock(obj, position = 'lb', seconds = 3) {
         const element = this.createDivElement(obj, position);
         document.body.append(element);
         this.messages.push(element);
@@ -32,6 +33,14 @@ export class MessageModule extends Module {
         const divElement = document.createElement('div');
         divElement.className = 'block block--message';
         setPositionElement(divElement, position);
+
+        if (this.messages.length > 0) {
+            this.nextHeightForMessage = this.messages[this.messages.length - 1].getBoundingClientRect().top;
+            divElement.style.top = this.nextHeightForMessage - 135 + 'px'
+        } else {
+            this.nextHeightForMessage = null;
+        }
+
 
         const imgElement = document.createElement('img');
         imgElement.className = 'block__img';
@@ -53,6 +62,7 @@ export class MessageModule extends Module {
 
         divContainer.append(h3Element, spanElement);
         divElement.append(imgElement, divSeparator, divContainer);
+
         return divElement;
     }
 
@@ -63,6 +73,7 @@ export class MessageModule extends Module {
             if (element.classList.contains('block--rb') || element.classList.contains('block--lb')) element.style.bottom = '0';
 
             setTimeout(() => {
+                this.messages.splice(element);
                 element.remove();
             }, (seconds * 1000) + 1000);
         }, seconds * 1000);
