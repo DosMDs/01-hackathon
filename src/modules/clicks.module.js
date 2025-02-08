@@ -5,20 +5,18 @@ export class ClicksModule extends Module {
     constructor() {
         super("clicks", "Подсчет кликов за определенное время");
         this.timerContainer = document.createElement('div');
+        this.countClick = 0;
+        this.handleClick = () => this.countClick++;
     }    
-
+    
     trigger() {
-        let countClick = 0;
+        setTimeout(() => {
+            document.addEventListener('click', this.handleClick);
+        }, 1)
 
-        const handleClick = () => {
-            countClick++;
-        };
-
-        document.addEventListener('click', handleClick);
-
-        createTimer(10, this.timerContainer, () => {
-            document.removeEventListener('click', handleClick);
-            alert(countClick);
+        createTimer(3, this.timerContainer, () => {
+            document.removeEventListener('click', this.handleClick);
+            alert(this.countClick);
         });
     };
 }
