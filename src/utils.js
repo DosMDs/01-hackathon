@@ -1,4 +1,4 @@
-import Modal from './modal';
+import { InputModal, Modal } from './modal';
 
 export function random(min, max) {
   return Math.round(min - 0.5 + Math.random() * (max - min + 1))
@@ -11,5 +11,10 @@ export function getRandomColor() {
 
 export function showModal(title, content = '') {
   const modal = new Modal();
+  modal.open(title, content);
+}
+
+export function showInputModal(title, content = '', closeWithResult, inputType = 'text') {
+  const modal = new InputModal(closeWithResult, inputType);
   modal.open(title, content);
 }

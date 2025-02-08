@@ -1,10 +1,5 @@
-class Modal {
-  constructor(isInput = false, isQuestion = false) {
-    this.state = {
-      isInput: isInput,
-      isQuestion: isQuestion
-    };
-
+export class Modal {
+  constructor() {
     this.modal = document.querySelector('.modal-overlay');
     this.modalTitle = document.querySelector('.modal__title');
     this.modalBody = document.querySelector('.modal__body');
@@ -21,25 +16,16 @@ class Modal {
     this.modalTitle.innerHTML = title;
     this.modalBody.innerHTML = content;
     this.modal.classList.toggle('modal-overlay_hidden');
-    if (this.state.isInput) {
-      this._addInput();
-    } else {
-      this._addOkBtn();
-    }
+    this._addButtons();
   }
 
-  _addOkBtn() {
+  _addButtons() {
     const buttonOK = document.createElement('button');
     buttonOK.classList.add('modal__button', 'modal__confirm-button');
     buttonOK.textContent = 'OK';
     this.modalButtons.appendChild(buttonOK);
 
     buttonOK.addEventListener('click', (event) => this.close());
-  }
-
-  _addInput() {
-    const mainForm = document.createElement('form');
-    
   }
 
   close() {
@@ -50,4 +36,31 @@ class Modal {
   }
 }
 
-export default Modal;
+export class InputModal extends Modal {
+  constructor(closeWithResult, inputType = 'text') {
+    super();
+
+    this.state = {
+      closeWithResult: closeWithResult,
+      inputType: inputType
+    };
+  }
+
+  _addButtons() {
+    const form = document.createElement('form');
+    const input = document.createElement('input');
+    input.name = 'inputField';
+    input.type = this.state.inputType;
+    const buttonOK = document.createElement('button');
+    buttonOK.classList.add('modal__button', 'modal__confirm-button');
+    buttonOK.textContent = 'OK';
+    form.append(input, buttonOK);
+    this.modalButtons.appendChild(form);
+    
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      this.state.closeWithResult(event);
+      this.close();
+    })
+  }
+}
