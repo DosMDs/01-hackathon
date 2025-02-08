@@ -6,6 +6,11 @@ export class RandomSoundModule extends Module {
     }
 
     trigger() {
+        this.makeRandomSound();
+    }
+
+
+    makeRandomSound() {
         const playNote = (frequency) => {
             const audioContext = new AudioContext();
             const oscillator = audioContext.createOscillator();
