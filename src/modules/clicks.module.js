@@ -1,5 +1,5 @@
 import { Module } from "../core/module";
-import { createTimer } from "../utils";
+import { createTimer, showModal } from "../utils";
 
 class ClicksModule extends Module {
   constructor() {
@@ -47,9 +47,8 @@ class ClicksModule extends Module {
     createTimer(3, this.timerContainer, () => {
       document.removeEventListener("click", this.handleClick);
       this.state.countClick = this.state.oneClick + this.state.doubleClick;
-      alert(
-        `Одиночных кликов: ${this.state.oneClick}, Дабл кликов: ${this.state.doubleClick}, Всего кликов: ${this.state.countClick}`
-      );
+      const result = `Одиночных кликов: ${this.state.oneClick}, Дабл кликов: ${this.state.doubleClick}, Всего кликов: ${this.state.countClick}`;
+      showModal("Результат подсчета кликов", result);
     });
   }
 
