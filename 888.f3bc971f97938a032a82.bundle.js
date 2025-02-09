@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[888],{3888:(e,f,c)=>{c.r(f),c.d(f,{default:()=>s});const s=c.p+"72774c385184628fe969fe9378caff9a.gif"}}]);
