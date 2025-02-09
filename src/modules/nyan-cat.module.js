@@ -13,7 +13,7 @@ export class NyanCatModule extends Module {
     constructor() {
         super("watch-diarams", "Посмотреть диорамы");
 
-        this.characters = null;
+        this.characters = [];
         this.backGround = null;
         this.currentAudio = null;
         this.diagrams = [
@@ -44,6 +44,7 @@ export class NyanCatModule extends Module {
             buttonElement.addEventListener('click', () => {
                 this.reset()
                 diagram.method.call(this);
+                // buttonElement.disabled = true;
             })
 
             menuDiagram.append(buttonElement);
@@ -56,54 +57,32 @@ export class NyanCatModule extends Module {
         this.setMusic(mk3)
         this.setBackGround(backGroundMk3)
 
-        const cyraxDancingElement = document.createElement('img');
-        cyraxDancingElement.src = cyraxDancing;
-        cyraxDancingElement.width = '200';
-        cyraxDancingElement.height = '400';
-        cyraxDancingElement.style.zIndex = '3'
-        cyraxDancingElement.style.position = 'absolute';
-        cyraxDancingElement.style.top = (window.innerHeight / 2 - 250) + 'px';
-        cyraxDancingElement.style.left = (window.innerWidth / 2 + 700) + 'px';
-
-        const subZeroElement = document.createElement('img');
-        subZeroElement.src = subzero;
-        subZeroElement.width = '250';
-        subZeroElement.height = '500';
-        subZeroElement.style.zIndex = '3'
-        subZeroElement.style.position = 'absolute';
-        subZeroElement.style.top = (window.innerHeight / 2) + 'px';
-        subZeroElement.style.left = (window.innerWidth / 2 - 500) + 'px';
-
-
-        const sonyaElement = document.createElement('img');
-        sonyaElement.src = sonya;
-        sonyaElement.width = '250';
-        sonyaElement.height = '500';
-        sonyaElement.style.zIndex = '3'
-        sonyaElement.style.position = 'absolute';
-        sonyaElement.style.top = (window.innerHeight / 2) + 'px';
-        sonyaElement.style.left = (window.innerWidth / 2 + 200) + 'px';
-        sonyaElement.style.transform = 'scaleX(-1)'
+        const cyraxDancingElement = this.createCharacter(cyraxDancing, 250, 500, false, 0.75, 400, 200)
+        const subZeroElement = this.createCharacter(subzero, 0, -400, false, 1, 400, 200)
+        const sonyaElement = this.createCharacter(sonya, 0, 200, true, 1, 400, 200)
 
         document.body.append(cyraxDancingElement, subZeroElement, sonyaElement);
+        this.characters.push(cyraxDancingElement, subZeroElement, sonyaElement);
     }
 
     playNyanCat() {
         this.setMusic(nyancatSound);
         this.setBackGround(backGroundImg);
 
-        const nyanCatElement = document.createElement('img');
-        nyanCatElement.src = nyancat;
-        nyanCatElement.width = '150';
-        nyanCatElement.height = '90';
-        nyanCatElement.style.zIndex = '3'
-        nyanCatElement.style.position = 'absolute';
-        nyanCatElement.style.top = (window.innerHeight / 2 - 75 / 2) + 'px';
-        nyanCatElement.style.left = (window.innerWidth / 2 - 150 / 2) + 'px';
+
+        const nyanCatElement = this.createCharacter(nyancat, 75, 150, false, null, 90, 130);
 
         let cursorYPosition = null;
         let cursorXPosition = null;
-        setInterval(() => {
+
+        let movingCat = null;
+        let rainbow = null;
+        movingCat = setInterval(() => {
+            if(!document.contains(nyanCatElement)) {
+                movingCat.clearInterval();
+                rainbow.clearInterval();
+            }
+
             let currentLeft = parseInt(nyanCatElement.style.left);
             let currentTop = parseInt(nyanCatElement.style.top);
 
@@ -137,7 +116,7 @@ export class NyanCatModule extends Module {
             const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
             const offset = 7;
 
-            setTimeout(() => {
+            rainbow = setTimeout(() => {
                 colors.forEach((color, index) => {
                     const div = document.createElement('div');
                     div.style.position = 'absolute';
@@ -153,7 +132,7 @@ export class NyanCatModule extends Module {
 
                     setTimeout(() => {
                         div.remove();
-                    }, 5000);
+                    }, 1000);
                 });
             }, 100);
 
@@ -165,6 +144,27 @@ export class NyanCatModule extends Module {
             cursorYPosition = event.pageY;
         });
         document.body.append(nyanCatElement);
+        this.characters.push(nyanCatElement);
+    }
+
+    createCharacter(imgCharacter, posY, posX, reverse = false, scale = 1, height, width) {
+        const character = document.createElement('img');
+        character.src = imgCharacter;
+        character.width = width;
+        character.height = height;
+        character.style.zIndex = '3'
+        character.style.position = 'absolute';
+        character.style.top = (window.innerHeight / 2 - posY) + 'px';
+        character.style.left = (window.innerWidth / 2 + posX) + 'px';
+        if (reverse) {
+            character.style.transform = 'scaleX(-1)'
+        }
+        if (scale) {
+            character.style.scale = scale
+        }
+
+        this.characters.push(character);
+        return character;
     }
 
     setMusic(audioSrc) {
@@ -197,7 +197,7 @@ export class NyanCatModule extends Module {
     }
 
     resetBackGround() {
-        if(this.backGround) {
+        if (this.backGround) {
             this.backGround.remove();
         }
     }
@@ -211,7 +211,7 @@ export class NyanCatModule extends Module {
     }
 
     resetCharacters() {
-        if(this.characters) {
+        if (this.characters) {
             this.characters.forEach((c) => {
                 c.remove();
             })
