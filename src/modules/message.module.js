@@ -7,10 +7,13 @@ class MessageModule extends Module {
   constructor() {
     super("message", "Вызвать сообщение");
 
+    this.state = {
+      messages: [],
+      nextHeightForMessage: null
+    }
+
     this.quotes = quotes.quotes;
     this.statham = statham;
-    this.messages = [];
-    this.nextHeightForMessage = null;
   }
 
   trigger() {
@@ -24,7 +27,7 @@ class MessageModule extends Module {
   createMessageBlock(obj, position = "lb", seconds = 7) {
     const element = this.createDivElement(obj, position);
     document.body.append(element);
-    this.messages.push(element);
+    this.state.messages.push(element);
 
     setTimeout(() => {
       this.deleteMessageBlock(element);
@@ -36,24 +39,24 @@ class MessageModule extends Module {
     divElement.className = "block block--message";
     setPositionElement(divElement, position);
 
-    if (this.messages.length > 0) {
-      this.nextHeightForMessage =
-        this.messages[this.messages.length - 1].getBoundingClientRect().top;
+    if (this.state.messages.length > 0) {
+      this.state.nextHeightForMessage =
+        this.state.messages[this.state.messages.length - 1].getBoundingClientRect().top;
 
       if (
         divElement.classList.contains("block--rt") ||
         divElement.classList.contains("block--lt")
       ) {
-        divElement.style.top = this.nextHeightForMessage + 135 + "px";
+        divElement.style.top = this.state.nextHeightForMessage + 135 + "px";
       }
       if (
         divElement.classList.contains("block--rb") ||
         divElement.classList.contains("block--lb")
       ) {
-        divElement.style.top = this.nextHeightForMessage - 135 + "px";
+        divElement.style.top = this.state.nextHeightForMessage - 135 + "px";
       }
     } else {
-      this.nextHeightForMessage = null;
+      this.state.nextHeightForMessage = null;
     }
 
     const imgElement = document.createElement("img");
@@ -92,15 +95,15 @@ class MessageModule extends Module {
       element.classList.contains("block--lb")
     )
       element.style.bottom = "0";
-    this.messages.splice(0, 1);
+    this.state.messages.splice(0, 1);
 
     setTimeout(() => {
-      if (this.messages.length > 0) {
+      if (this.state.messages.length > 0) {
         const lastMessage =
-          this.messages[this.messages.length - 1].getBoundingClientRect().top;
+          this.state.messages[this.state.messages.length - 1].getBoundingClientRect().top;
         let nextTopPosition = lastMessage + 135 + "px";
 
-        this.messages.forEach((message) => {
+        this.state.messages.forEach((message) => {
           nextTopPosition = parseInt(message.style.top) + 135 + "px";
           message.style.top = nextTopPosition;
         });
