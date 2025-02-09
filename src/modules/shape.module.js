@@ -76,8 +76,8 @@ class Ellipse extends Shape {
     this.ctx.ellipse(
       this.centerX,
       this.centerY,
-      w / 2,
-      (w * r) / 2,
+      this.state.newBox.w / 2,
+      (this.state.newBox.w * r) / 2,
       (d * Math.PI) / 180,
       0,
       2 * Math.PI
@@ -92,12 +92,12 @@ class Star extends Shape {
       const r = this.state.radiusRatio;
       this.prepareContext()
       this.ctx.translate(this.centerX, this.centerY);
-      this.ctx.moveTo(0, -w / 2);
+      this.ctx.moveTo(0, -this.state.newBox.w / 2);
       for (let i = 0; i < n; i++) {
         this.ctx.rotate(Math.PI / n);
-        this.ctx.lineTo(0, -((w / 2) * r));
+        this.ctx.lineTo(0, -((this.state.newBox.w / 2) * r));
         this.ctx.rotate(Math.PI / n);
-        this.ctx.lineTo(0, -w / 2);
+        this.ctx.lineTo(0, -this.state.newBox.w / 2);
       }
       this.finalizeContext()
     }
@@ -112,101 +112,17 @@ class ShapeModule extends Module {
     this.ctx = this.canvas.getContext("2d");
     document.body.append(this.canvas);
 
-    this.state = {
-      newBox: {},
-      curColor: "",
-      verticesNumber: 0,
-      rotateDegree: 0,
-      radiusRatio: 1,
-    };
-  }
-
-  polygon() {
-    this.ctx.save();
-    const { x0, y0, w, h } = this.state.newBox;
-    const x_c = x0 + w / 2;
-    const y_c = y0 + h / 2;
-    const n = this.state.verticesNumber;
-    const d = this.state.rotateDegree;
-    this.ctx.beginPath();
-    this.ctx.moveTo(
-      x_c + (w * Math.cos((d * Math.PI) / 180)) / 2,
-      y_c + (h * Math.sin((d * Math.PI) / 180)) / 2
-    );
-    for (let i = 1; i <= n; i += 1) {
-      this.ctx.lineTo(
-        x_c + (w * Math.cos((d * Math.PI) / 180 + (i * 2 * Math.PI) / n)) / 2,
-        y_c + (h * Math.sin((d * Math.PI) / 180 + (i * 2 * Math.PI) / n)) / 2
-      );
-    }
-    this.ctx.closePath();
-    this.ctx.fillStyle = this.state.curColor;
-    this.ctx.fill();
-    this.ctx.restore();
-  }
-
-  ellipse() {
-    this.ctx.save();
-    const { x0, y0, w, h } = this.state.newBox;
-    const x_c = x0 + w / 2;
-    const y_c = y0 + h / 2;
-    const r = this.state.radiusRatio;
-    const d = this.state.rotateDegree;
-    this.ctx.beginPath();
-    this.ctx.ellipse(
-      x_c,
-      y_c,
-      w / 2,
-      (w * r) / 2,
-      (d * Math.PI) / 180,
-      0,
-      2 * Math.PI
-    );
-    this.ctx.closePath();
-    this.ctx.fillStyle = this.state.curColor;
-    this.ctx.fill();
-    this.ctx.restore();
-  }
-
-  star() {
-    this.ctx.save();
-    const { x0, y0, w, h } = this.state.newBox;
-    const x_c = x0 + w / 2;
-    const y_c = y0 + h / 2;
-    const n = this.state.verticesNumber;
-    const r = this.state.radiusRatio;
-    this.ctx.beginPath();
-    this.ctx.translate(x_c, y_c);
-    this.ctx.moveTo(0, -w / 2);
-    for (let i = 0; i < n; i++) {
-      this.ctx.rotate(Math.PI / n);
-      this.ctx.lineTo(0, -((w / 2) * r));
-      this.ctx.rotate(Math.PI / n);
-      this.ctx.lineTo(0, -w / 2);
-    }
-    this.ctx.closePath();
-    this.ctx.fillStyle = this.state.curColor;
-    this.ctx.fill();
-    this.ctx.restore();
-  }
-
-  generateNewParameters() {
-    const newBox = {};
-    newBox.w = random(100, 300);
-    newBox.h = newBox.w;
-    newBox.x0 = random(0, this.canvas.width - newBox.w);
-    newBox.y0 = random(0, this.canvas.height - newBox.h);
-    this.state.newBox = newBox;
-    this.state.curColor = getRandomColor();
-    this.state.verticesNumber = random(3, 10);
-    this.state.rotateDegree = random(0, 360);
-    this.state.radiusRatio = random(1, 10) / 10;
+    this.state = {};
   }
 
   trigger() {
-    this.generateNewParameters();
-    const func = [this.polygon, this.ellipse, this.star];
-    func[random(0, func.length - 1)].bind(this)();
+    this.state = Shape.generateNewParameters(this.canvas);
+    const shapes = [
+      new Polygon(this.ctx, this.state),
+      new Ellipse(this.ctx, this.state),
+      new Star(this.ctx, this.state),
+    ];
+    shapes[random(0, shapes.length - 1)].draw();
   }
 }
 
