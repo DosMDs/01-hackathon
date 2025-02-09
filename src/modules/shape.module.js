@@ -70,10 +70,9 @@ class Polygon extends Shape {
 
 class Ellipse extends Shape {
   draw() {
-    this.prepareContext();
     const r = this.state.radiiRatio;
     const d = this.state.rotateDegree;
-    this.ctx.beginPath();
+    this.prepareContext();
     this.ctx.ellipse(
       this.centerX,
       this.centerY,
