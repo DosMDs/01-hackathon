@@ -14,6 +14,11 @@ export function showModal(title, content = "") {
   modal.open(title, content);
 }
 
+export function showInputModal(title, content = "", closeWithResult, inputType = "number") {
+  const inputModal = new InputModal(closeWithResult, inputType);
+  inputModal.open(title, content);
+}
+
 /* Задаем позицию элементу */
 export function setPositionElement(element, position) {
   switch (position) {
