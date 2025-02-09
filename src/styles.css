@@ -118,10 +118,10 @@ canvas {
     position: absolute;
     left: 0;
     top: 0;
-  }
+}
 
 
-.menu--diaram {
+.diagram-menu {
     z-index: 9999;
     position: absolute;
     top: calc(90% - 25px);
@@ -130,19 +130,34 @@ canvas {
     height: 50px;
     display: flex;
     border-radius: 5px;
+    box-shadow: 0 0 0 2px #000,
+    inset 2px 2px 0 rgba(255, 255, 255, 0.8),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.5);
+    background: #2a2a54;
+    padding: 2px;
 }
 
-.button--prev, .button--next {
-    width: 50px;
-    background-color: rgba(246, 246, 246, 0.75);
-    border-radius: 5px;
-    opacity: 0.75;
-}
-
-.div--container {
+.diagram-menu__button {
     width: 50%;
-    display: flex;
     border-radius: 5px;
-    margin: 2.5px;
-    background-color: rgba(246, 246, 246, 0.75);
+    border: none;
+    background-color: #666666;
+    color: #fff;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 14px;
+    text-shadow: 2px 2px #000;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.8),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.5);
+    transition: all 0.1s;
+}
+
+.diagram-menu__button:hover {
+    background-color: #808080;
+}
+
+.diagram-menu__button:active {
+    box-shadow: inset -2px -2px 0 rgba(255, 255, 255, 0.8),
+    inset 2px 2px 0 rgba(0, 0, 0, 0.5);
+    transform: scale(0.98);
 }
