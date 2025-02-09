@@ -56,9 +56,41 @@ export class NyanCatModule extends Module {
         this.setMusic(mk3)
         this.setBackGround(backGroundMk3)
 
-        const cyraxDancingElement = this.createCharacter(cyraxDancing, 250, 500, false, 0.75, 400, 200)
-        const subZeroElement = this.createCharacter(subzero, 0, -400, false, 1, 400, 200)
-        const sonyaElement = this.createCharacter(sonya, 0, 200, true, 1, 400, 200)
+        const characters = {
+            cyraxDancing: {
+                imgCharacter: cyraxDancing,
+                posY: 250,
+                posX: 500,
+                reverse: false,
+                scale: 0.75,
+                height: 400,
+                width: 200
+            },
+
+            subZero: {
+                imgCharacter: subzero,
+                posY: 0,
+                posX: -350,
+                reverse: false,
+                scale: 1,
+                height: 400,
+                width: 200
+            },
+
+            sonya: {
+                imgCharacter: sonya,
+                posY: 0,
+                posX: 115,
+                reverse: true,
+                scale: 1,
+                height: 400,
+                width: 200
+            }
+        }
+
+        const cyraxDancingElement = this.createCharacter(characters.cyraxDancing)
+        const subZeroElement = this.createCharacter(characters.subZero)
+        const sonyaElement = this.createCharacter(characters.sonya)
 
         document.body.append(cyraxDancingElement, subZeroElement, sonyaElement);
         this.characters.push(cyraxDancingElement, subZeroElement, sonyaElement);
@@ -69,17 +101,28 @@ export class NyanCatModule extends Module {
         this.setBackGround(backGroundImg);
 
 
-        const nyanCatElement = this.createCharacter(nyancat, 75, 150, false, null, 90, 130);
+        const nyanCatSettings = {
+            nyanCat: {
+                imgCharacter: nyancat,
+                posY: 75,
+                posX: 150,
+                reverse: false,
+                scale: null,
+                height: 90,
+                width: 130
+            }
+        }
+        const nyanCatElement = this.createCharacter(nyanCatSettings.nyanCat);
 
         let cursorYPosition = null;
         let cursorXPosition = null;
 
         let movingCat = null;
-        let rainbow = null;
+        let makeRainbowTrail = null;
         movingCat = setInterval(() => {
             if (!document.contains(nyanCatElement)) {
                 movingCat.clearInterval();
-                rainbow.clearInterval();
+                makeRainbowTrail.clearInterval();
             }
 
             let currentLeft = parseInt(nyanCatElement.style.left);
@@ -115,7 +158,7 @@ export class NyanCatModule extends Module {
             const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
             const offset = 7;
 
-            rainbow = setTimeout(() => {
+            makeRainbowTrail = setTimeout(() => {
                 colors.forEach((color, index) => {
                     const div = document.createElement('div');
                     div.style.position = 'absolute';
@@ -146,7 +189,9 @@ export class NyanCatModule extends Module {
         this.characters.push(nyanCatElement);
     }
 
-    createCharacter(imgCharacter, posY, posX, reverse = false, scale = 1, height, width) {
+    createCharacter(settings) {
+        const {imgCharacter, posY, posX, reverse, scale, height, width} = settings;
+
         const character = document.createElement('img');
         character.src = imgCharacter;
         character.width = width;
@@ -176,15 +221,11 @@ export class NyanCatModule extends Module {
     }
 
     setBackGround(imgSrc) {
-        document.body.style.background = 'black';
+        // document.body.style.background = 'black';
 
         const backGround = document.createElement('img');
-        backGround.id = 'background';
-        backGround.style.width = '100%';
-        backGround.style.height = '100%';
-        backGround.style.zIndex = '-1';
-        backGround.style.clipPath = 'inset(5px)'
-        backGround.style.scale = '0.9'
+        backGround.className = 'diagram__background'
+        backGround.style.zIndex = '-1'
         backGround.src = imgSrc;
 
         this.backGround = backGround;

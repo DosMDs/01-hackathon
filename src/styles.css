@@ -120,6 +120,12 @@ canvas {
     top: 0;
 }
 
+.diagram__background {
+    width: 100%;
+    height: 100%;
+    clip-path: inset(5px);
+    scale: 0.9;
+}
 
 .diagram-menu {
     z-index: 9999;
