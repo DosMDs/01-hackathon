@@ -16,7 +16,7 @@ export class RandomSoundModule extends Module {
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
 
-            gainNode.gain.value = 0.1;
+            gainNode.gain.value = 0.05;
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
             oscillator.frequency.value = frequency;

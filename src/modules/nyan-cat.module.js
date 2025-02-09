@@ -225,7 +225,7 @@ export class NyanCatModule extends Module {
     setMusic(audioSrc) {
         const audio = new Audio(audioSrc);
         audio.loop = true;
-        audio.volume = 0.1;
+        audio.volume = 0.05;
 
         this.currentAudio = audio;
         audio.play();
