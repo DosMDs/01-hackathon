@@ -1,4 +1,4 @@
-import Modal from "./modal";
+import { InputModal, Modal } from "./modal";
 
 export function random(min, max) {
   return Math.round(min - 0.5 + Math.random() * (max - min + 1));
@@ -12,6 +12,17 @@ export function getRandomColor() {
 export function showModal(title, content = "") {
   const modal = new Modal();
   modal.open(title, content);
+}
+
+export function showInputModal(
+  title,
+  closeWithResult,
+  content = "",
+  inputType = "number",
+  placeholder = ""
+) {
+  const inputModal = new InputModal(closeWithResult, inputType, placeholder);
+  inputModal.open(title, content);
 }
 
 /* Задаем позицию элементу */
@@ -44,7 +55,6 @@ export function createTimer(
   finalFunction = undefined,
   textContainer = undefined
 ) {
-
   if (isNaN(time)) {
     return;
   } else if (time <= 0) {
