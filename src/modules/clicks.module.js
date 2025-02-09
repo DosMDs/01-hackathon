@@ -44,7 +44,7 @@ class ClicksModule extends Module {
       document.addEventListener("click", this.handleClick);
     }, 1);
 
-    createTimer(3, this.timerContainer, () => {
+    createTimer(3, () => {
       document.removeEventListener("click", this.handleClick);
       this.state.countClick = this.state.oneClick + this.state.doubleClick;
       const result = `Одиночных кликов: ${this.state.oneClick}, Дабл кликов: ${this.state.doubleClick}, Всего кликов: ${this.state.countClick}`;

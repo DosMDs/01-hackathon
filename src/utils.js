@@ -41,30 +41,36 @@ export function setPositionElement(element, position) {
 
 export function createTimer(
   time,
-  timerContainer = undefined,
-  finalFunction = undefined
+  finalFunction = undefined,
+  textContainer = undefined
 ) {
-  if (!timerContainer) {
-    return;
+  const createContainer = !textContainer;
+  let timerTextContainer = textContainer;
+  let timerContainer = undefined;
+
+  if (createContainer) {
+    timerContainer = document.createElement("div");
+    timerContainer.className = "timer";
+    setPositionElement(timerContainer, "rt");
+    timerTextContainer = document.createElement("h3");
+    timerContainer.prepend(timerTextContainer);
+    document.body.prepend(timerContainer);
   }
 
-  const timerTextHTML = document.createElement("h3");
-
-  const body = document.querySelector("body");
-  timerContainer.prepend(timerTextHTML);
-  body.prepend(timerContainer);
+  timerTextContainer.textContent = time;
 
   const timer = setInterval(() => {
     if (time === 0) {
       clearInterval(timer);
-      timerTextHTML.remove();
-      timerContainer.remove();
+      if (createContainer) {
+        timerContainer.remove();
+      }
 
       if (finalFunction && typeof finalFunction === "function") {
         finalFunction();
       }
     } else {
-      timerTextHTML.textContent = time;
+      timerTextContainer.textContent = time;
       time--;
     }
   }, 1000);
