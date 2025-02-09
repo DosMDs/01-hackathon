@@ -63,6 +63,8 @@ export class DioramsModule extends Module {
             switch (action) {
                 case 'reset':
                     this.reset();
+                    document.querySelector('.diagram-menu').remove();
+                    document.body.style.background = 'unset';
                     break;
                 case 'playDiagram':
                     const index = button.dataset.index;
@@ -150,12 +152,11 @@ export class DioramsModule extends Module {
         let cursorYPosition = null;
         let cursorXPosition = null;
 
-        let movingCat = null;
         let makeRainbowTrail = null;
-        movingCat = setInterval(() => {
+        const movingCat = setInterval(() => {
             if (!document.contains(nyanCatElement)) {
-                movingCat.clearInterval();
-                makeRainbowTrail.clearInterval();
+                clearInterval(movingCat);
+                clearInterval(makeRainbowTrail);
             }
 
             let currentLeft = parseInt(nyanCatElement.style.left);
