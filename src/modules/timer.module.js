@@ -1,13 +1,16 @@
-import { Module } from '../core/module'
-import { createTimer } from '../utils'
+import { Module } from "../core/module";
+import { createTimer } from "../utils";
 
-export class TimerModule extends Module {
+class TimerModule extends Module {
   constructor() {
     super("timer", "Обратный таймер");
   }
 
   trigger() {
-    const seconds = parseInt(prompt("Введите количество секунд для таймера"), 10);
+    const seconds = parseInt(
+      prompt("Введите количество секунд для таймера"),
+      10
+    );
 
     if (isNaN(seconds) || seconds <= 0) {
       alert("Введите корректное число секунд!");
@@ -28,3 +31,5 @@ export class TimerModule extends Module {
     createTimer(seconds, timerContainer, () => alert("Время вышло!"));
   }
 }
+
+export default TimerModule;
