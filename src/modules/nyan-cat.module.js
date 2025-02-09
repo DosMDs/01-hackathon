@@ -7,6 +7,7 @@ import mk3 from '@/resources/sound/mk3.mp3'
 import cyraxDancing from '@/resources/img/mk3/cyrax-dance.gif'
 import subzero from '@/resources/img/mk3/subzero.gif'
 import sonya from '@/resources/img/mk3/sonya.gif'
+import fightImg from '@/resources/img/mk3/fight.gif'
 
 
 export class NyanCatModule extends Module {
@@ -56,19 +57,28 @@ export class NyanCatModule extends Module {
         this.setMusic(mk3)
         this.setBackGround(backGroundMk3)
 
-        const characters = {
-            cyraxDancing: {
-                imgCharacter: cyraxDancing,
-                posY: 250,
-                posX: 500,
+        const images = {
+            fight: {
+                img: fightImg,
+                posY: 400,
+                posX: -200,
                 reverse: false,
-                scale: 0.75,
+                height: 200,
+                width: 400,
+            },
+
+            cyraxDancing: {
+                img: cyraxDancing,
+                posY: 225,
+                posX: 350,
+                reverse: false,
+                scale: 0.55,
                 height: 400,
                 width: 200
             },
 
             subZero: {
-                imgCharacter: subzero,
+                img: subzero,
                 posY: 0,
                 posX: -350,
                 reverse: false,
@@ -78,9 +88,9 @@ export class NyanCatModule extends Module {
             },
 
             sonya: {
-                imgCharacter: sonya,
+                img: sonya,
                 posY: 0,
-                posX: 115,
+                posX: 135,
                 reverse: true,
                 scale: 1,
                 height: 400,
@@ -88,12 +98,13 @@ export class NyanCatModule extends Module {
             }
         }
 
-        const cyraxDancingElement = this.createCharacter(characters.cyraxDancing)
-        const subZeroElement = this.createCharacter(characters.subZero)
-        const sonyaElement = this.createCharacter(characters.sonya)
+        const fight = this.setImage(images.fight)
+        const cyraxDancingElement = this.setImage(images.cyraxDancing)
+        const subZeroElement = this.setImage(images.subZero)
+        const sonyaElement = this.setImage(images.sonya)
 
-        document.body.append(cyraxDancingElement, subZeroElement, sonyaElement);
-        this.characters.push(cyraxDancingElement, subZeroElement, sonyaElement);
+        document.body.append(fight, cyraxDancingElement, subZeroElement, sonyaElement);
+        this.characters.push(fight, cyraxDancingElement, subZeroElement, sonyaElement);
     }
 
     playNyanCat() {
@@ -103,7 +114,7 @@ export class NyanCatModule extends Module {
 
         const nyanCatSettings = {
             nyanCat: {
-                imgCharacter: nyancat,
+                img: nyancat,
                 posY: 75,
                 posX: 150,
                 reverse: false,
@@ -112,7 +123,7 @@ export class NyanCatModule extends Module {
                 width: 130
             }
         }
-        const nyanCatElement = this.createCharacter(nyanCatSettings.nyanCat);
+        const nyanCatElement = this.setImage(nyanCatSettings.nyanCat);
 
         let cursorYPosition = null;
         let cursorXPosition = null;
@@ -189,26 +200,26 @@ export class NyanCatModule extends Module {
         this.characters.push(nyanCatElement);
     }
 
-    createCharacter(settings) {
-        const {imgCharacter, posY, posX, reverse, scale, height, width} = settings;
+    setImage(settings) {
+        const {img, posY, posX, reverse, scale, height, width} = settings;
 
-        const character = document.createElement('img');
-        character.src = imgCharacter;
-        character.width = width;
-        character.height = height;
-        character.style.zIndex = '3'
-        character.style.position = 'absolute';
-        character.style.top = (window.innerHeight / 2 - posY) + 'px';
-        character.style.left = (window.innerWidth / 2 + posX) + 'px';
+        const image = document.createElement('img');
+        image.src = img;
+        image.width = width;
+        image.height = height;
+        image.style.zIndex = '3'
+        image.style.position = 'absolute';
+        image.style.top = (window.innerHeight / 2 - posY) + 'px';
+        image.style.left = (window.innerWidth / 2 + posX) + 'px';
         if (reverse) {
-            character.style.transform = 'scaleX(-1)'
+            image.style.transform = 'scaleX(-1)'
         }
         if (scale) {
-            character.style.scale = scale
+            image.style.scale = scale
         }
 
-        this.characters.push(character);
-        return character;
+        this.characters.push(image);
+        return image;
     }
 
     setMusic(audioSrc) {
