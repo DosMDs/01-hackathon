@@ -10,7 +10,7 @@ import sonya from '@/resources/img/mk3/sonya.gif'
 import fightImg from '@/resources/img/mk3/fight.gif'
 
 
-export class NyanCatModule extends Module {
+export class DioramsModule extends Module {
     constructor() {
         super("watch-diarams", "Посмотреть диорамы");
 
