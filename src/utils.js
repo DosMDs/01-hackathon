@@ -1,4 +1,4 @@
-import { InputModal, Modal } from './modal';
+import { InputModal, Modal } from "./modal";
 
 export function random(min, max) {
   return Math.round(min - 0.5 + Math.random() * (max - min + 1));
@@ -14,8 +14,14 @@ export function showModal(title, content = "") {
   modal.open(title, content);
 }
 
-export function showInputModal(title, content = "", closeWithResult, inputType = "number") {
-  const inputModal = new InputModal(closeWithResult, inputType);
+export function showInputModal(
+  title,
+  closeWithResult,
+  content = "",
+  inputType = "number",
+  placeholder = ""
+) {
+  const inputModal = new InputModal(closeWithResult, inputType, placeholder);
   inputModal.open(title, content);
 }
 
@@ -49,7 +55,6 @@ export function createTimer(
   finalFunction = undefined,
   textContainer = undefined
 ) {
-
   if (isNaN(time)) {
     return;
   } else if (time <= 0) {

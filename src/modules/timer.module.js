@@ -1,5 +1,5 @@
 import { Module } from "../core/module";
-import { createTimer, showModal, setPositionElement } from "../utils";
+import { createTimer, showModal, showInputModal } from "../utils";
 
 class TimerModule extends Module {
   constructor() {
@@ -7,11 +7,12 @@ class TimerModule extends Module {
   }
 
   trigger() {
-    const seconds = parseInt(
-      prompt("Введите количество секунд для таймера"),
-      10
-    );
+    showInputModal("Введите количество секунд для таймера", this.closeWithResult)
+  }
 
+  closeWithResult(value) {
+    const seconds = Number(value);
+    
     if (isNaN(seconds) || seconds <= 0) {
       showModal("Введите корректное число секунд!");
       return;
@@ -19,6 +20,7 @@ class TimerModule extends Module {
 
     createTimer(seconds, () => showModal("Время вышло!"));
   }
+
 }
 
 export default TimerModule;

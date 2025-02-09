@@ -1,239 +1,290 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap");
 
 :root {
-    --color-dark: #1b1a1a;
-    --color-light: #eee;
-    --color-hover: #343434;
-    --transition-default: 0.3s ease-in;
-    --border-radius: 5px;
-    --shadow-heavy: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
+  --color-dark: #1b1a1a;
+  --color-light: #eee;
+  --color-hover: #343434;
+  --transition-default: 0.3s ease-in;
+  --border-radius: 5px;
+  --shadow-heavy: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font: 14px "Roboto", sans-serif;
-    height: 100vh;
-    width: 100%;
-    padding: 2rem;
+  font: 14px "Roboto", sans-serif;
+  height: 100vh;
+  width: 100%;
+  padding: 2rem;
 }
 
 .menu {
-    position: fixed;
-    z-index: 1000;
-    width: 250px;
-    background: var(--color-dark);
-    border-radius: var(--border-radius);
-    list-style: none;
-    display: none;
+  position: fixed;
+  z-index: 1000;
+  width: 250px;
+  background: var(--color-dark);
+  border-radius: var(--border-radius);
+  list-style: none;
+  display: none;
 }
 
 .menu.open {
-    display: block;
+  display: block;
 }
 
 .timer {
-    position: fixed;
-    background: var(--color-dark);
-    color: var(--color-light);
-    padding: 10px 15px;
-    border-radius: var(--border-radius);
-    font: bold 18px;
+  position: fixed;
+  background: var(--color-dark);
+  color: var(--color-light);
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  font: bold 18px;
 }
 
 .menu .menu-item {
-    padding: 8px 10px;
-    font-size: 1rem;
-    color: var(--color-light);
-    cursor: pointer;
-    transition: background-color 0.2s ease-in;
-    border-radius: inherit;
+  padding: 8px 10px;
+  font-size: 1rem;
+  color: var(--color-light);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  border-radius: inherit;
 }
 
 .menu .menu-item:hover {
-    background: var(--color-hover);
+  background: var(--color-hover);
 }
 
 .modal-overlay {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(27 26 26 / 60%);
-    z-index: 1000;
-    transition: var(--transition-default);
-    opacity: 1;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(27 26 26 / 60%);
+  z-index: 1000;
+  transition: var(--transition-default);
+  opacity: 1;
 }
 
 .modal-overlay_hidden {
-    top: 100%;
-    opacity: 0;
+  top: 100%;
+  opacity: 0;
 }
 
 .modal {
-    position: relative;
-    width: 50%;
-    padding: 15px 25px;
-    border: 2px solid #fff;
-    border-radius: var(--border-radius);
-    background: var(--color-dark);
-    transition: var(--transition-default);
+  position: relative;
+  width: 50%;
+  padding: 15px 25px;
+  border: 2px solid #fff;
+  border-radius: var(--border-radius);
+  background: var(--color-dark);
+  transition: var(--transition-default);
 }
 
 .modal__title {
-    font-size: 2rem;
-    line-height: 2.5rem;
-    color: var(--color-light);
-    margin-bottom: 30px;
-    text-align: center;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  color: var(--color-light);
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 .modal__body {
-    color: var(--color-light);
-    padding: 15px 25px;
-    text-align: center;
+  color: var(--color-light);
+  padding: 15px 25px;
+  text-align: center;
 }
 
 .modal__buttons {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
 }
 
 .modal__button {
-    min-width: 50px;
-    cursor: pointer;
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
+  min-width: 50px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
 }
 
 .modal__confirm-button {
-    background: var(--color-light);
-    border: 1px solid var(--color-light);
+  background: var(--color-light);
+  border: 1px solid var(--color-light);
+}
+
+.modal__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modal__input-label {
+  color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.modal__input {
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  border: 1px solid #666;
+  background: #333;
+  color: var(--color-light);
+  transition: border-color 0.2s ease;
+}
+
+.modal__input:focus {
+  outline: none;
+  border-color: var(--color-light);
+}
+
+.modal__input::placeholder {
+  color: #999;
+}
+
+.modal__buttons-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.modal__cancel-button {
+  background: transparent;
+  border: 1px solid #666;
+  color: var(--color-light);
+  transition: all 0.2s ease;
+}
+
+.modal__cancel-button:hover {
+  background: #343434;
+  border-color: #888;
 }
 
 .block {
-    transition: var(--transition-default);
+  transition: var(--transition-default);
 }
 
 .block--message {
-    position: absolute;
-    width: 400px;
-    padding: 10px;
-    background-color: rgb(246 246 246 / 35%);
-    border: 1px solid #9c9c9c;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-heavy);
-    display: flex;
-    gap: 15px;
-    height: 125px;
-    overflow: hidden;
+  position: absolute;
+  width: 400px;
+  padding: 10px;
+  background-color: rgb(246 246 246 / 35%);
+  border: 1px solid #9c9c9c;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-heavy);
+  display: flex;
+  gap: 15px;
+  height: 125px;
+  overflow: hidden;
 }
 
 .block--delete {
-    opacity: 0;
+  opacity: 0;
 }
 
 .block__img {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    object-fit: cover;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .block__vr {
-    width: 1px;
-    background: lightgray;
-    box-shadow: var(--shadow-heavy);
+  width: 1px;
+  background: lightgray;
+  box-shadow: var(--shadow-heavy);
 }
 
 .block__h3 {
-    font-size: 0.9rem;
-    margin-bottom: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
 }
 
 /* Позиции для абсолютных элементов */
 
 /* right-bottom */
 .block--rb {
-    bottom: 50px;
-    right: 50px;
+  bottom: 50px;
+  right: 50px;
 }
 
 /* right-top */
 .block--rt {
-    top: 50px;
-    right: 50px;
+  top: 50px;
+  right: 50px;
 }
 
 /* left-bottom */
 .block--lb {
-    bottom: 50px;
-    left: 50px;
+  bottom: 50px;
+  left: 50px;
 }
 
 /* left-top */
 .block--lt {
-    top: 50px;
-    left: 50px;
+  top: 50px;
+  left: 50px;
 }
 
 canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .diagram__background {
-    width: 100%;
-    height: 100%;
-    clip-path: inset(5px);
-    scale: 0.9;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(5px);
+  scale: 0.9;
 }
 
 .diagram-menu {
-    z-index: 9999;
-    position: absolute;
-    top: calc(87.5% - 25px);
-    left: calc(50% - 150px);
-    width: 300px;
-    height: 50px;
-    display: flex;
-    border-radius: 5px;
-    box-shadow: 0 0 0 2px #000,
-    inset 2px 2px 0 rgba(255, 255, 255, 0.8),
+  z-index: 9999;
+  position: absolute;
+  top: calc(87.5% - 25px);
+  left: calc(50% - 150px);
+  width: 300px;
+  height: 50px;
+  display: flex;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px #000, inset 2px 2px 0 rgba(255, 255, 255, 0.8),
     inset 2px 2px 0 rgba(0, 0, 0, 0.5);
-    background: #2a2a54;
-    padding: 2px;
+  background: #2a2a54;
+  padding: 2px;
 }
 
 .diagram-menu__button {
-    width: 33.3%;
-    border-radius: 5px;
-    border: none;
-    background-color: #666666;
-    color: #fff;
-    font-family: 'Press Start 2P', 'Courier New', monospace;
-    font-size: 14px;
-    text-shadow: 2px 2px #000;
-    cursor: pointer;
-    box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.8),
+  width: 33.3%;
+  border-radius: 5px;
+  border: none;
+  background-color: #666666;
+  color: #fff;
+  font-family: "Press Start 2P", "Courier New", monospace;
+  font-size: 14px;
+  text-shadow: 2px 2px #000;
+  cursor: pointer;
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.8),
     inset -2px -2px 0 rgba(0, 0, 0, 0.5);
-    transition: all 0.1s;
+  transition: all 0.1s;
 }
 
 .diagram-menu__button:hover {
-    background-color: #808080;
+  background-color: #808080;
 }
 
 .diagram-menu__button:active {
-    box-shadow: inset -2px -2px 0 rgba(255, 255, 255, 0.8),
+  box-shadow: inset -2px -2px 0 rgba(255, 255, 255, 0.8),
     inset 2px 2px 0 rgba(0, 0, 0, 0.5);
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
