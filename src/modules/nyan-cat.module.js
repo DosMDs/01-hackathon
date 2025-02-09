@@ -8,24 +8,34 @@ export class NyanCatModule extends Module {
         super("watch-diarams", "Посмотреть диорамы");
     }
 
-    trigger() {
-        const audio = new Audio(nyancatSound);
+    playMusic(audioSrc) {
+        const audio = new Audio(audioSrc);
         audio.loop = true;
         audio.volume = 0.01;
+
         audio.play();
+    }
+
+    setBackGround(imgSrc) {
+        document.body.style.background = 'black';
 
         const backGround = document.createElement('img');
-        backGround.src = backGroundImg;
         backGround.style.width = '100%';
         backGround.style.height = '100%';
-        backGround.style.zIndex = '1';
+        backGround.style.zIndex = '-1';
+        backGround.src = imgSrc;
         document.body.append(backGround);
+    }
+
+    trigger() {
+        this.playMusic(nyancatSound);
+        this.setBackGround(backGroundImg);
 
 
         const nyanCatImg = document.createElement('img');
         nyanCatImg.src = nyancatImg;
         nyanCatImg.width = '150';
-        nyanCatImg.height = '75';
+        nyanCatImg.height = '90';
         nyanCatImg.style.zIndex = '3'
         nyanCatImg.style.position = 'absolute';
         nyanCatImg.style.top = (window.innerHeight / 2 - 75 / 2) + 'px';
@@ -68,9 +78,11 @@ export class NyanCatModule extends Module {
             );
             let angleDeg = angleRad * (180 / Math.PI);
 
-            // Плавно поворачиваем спрайт
-            rotation = rotation + (((angleDeg - rotation + 180) % 360) - 180) * 0.1;
-            nyanCatImg.style.transform = `rotate(${rotation}deg)`;
+            if(angleDeg >= -90 && angleDeg <= 90) {
+                nyanCatImg.style.transform = 'scaleX(1)';
+            } else {
+                nyanCatImg.style.transform = 'scaleX(-1)';
+            }
 
             // Движение влево/вправо
             if (currentLeft < cursorXPosition - nyanCatImg.width / 2) {
@@ -98,7 +110,6 @@ export class NyanCatModule extends Module {
                     div.style.background = color;
                     div.style.width = '7px';
                     div.style.height = '7px';
-                    div.style.borderRadius = '50%';
 
                     div.style.top = (currentTop + nyanCatImg.height / 2 - 27 + (index * offset)) + 'px';
                     div.style.left = currentLeft + nyanCatImg.width / 2 + 'px';
@@ -109,7 +120,7 @@ export class NyanCatModule extends Module {
                         div.remove();
                     }, 5000);
                 });
-            }, 15);
+            }, 100);
 
         }, 10);
 
@@ -120,6 +131,7 @@ export class NyanCatModule extends Module {
         });
         document.body.append(nyanCatImg);
     }
+
 
     stopGif(img) {
         const currentSrc = img.src;
