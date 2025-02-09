@@ -254,7 +254,7 @@ export class DioramsModule extends Module {
     }
 
     setBackGround(imgSrc) {
-        // document.body.style.background = 'black';
+        document.body.style.background = 'black';
 
         const backGround = document.createElement('img');
         backGround.className = 'diagram__background'
