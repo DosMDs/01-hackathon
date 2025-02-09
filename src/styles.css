@@ -16,8 +16,7 @@
 }
 
 body {
-  font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font: 14px "Roboto", sans-serif;
   height: 100vh;
   width: 100%;
   padding: 2rem;
