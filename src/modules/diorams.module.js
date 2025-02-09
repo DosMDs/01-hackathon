@@ -1,7 +1,4 @@
 import { Module } from "@/core/module";
-import cyraxDancing from "@/resources/img/mk3/cyrax-dance.gif";
-import subzero from "@/resources/img/mk3/subzero.gif";
-import sonya from "@/resources/img/mk3/sonya.gif";
 
 export class DioramsModule extends Module {
   constructor() {
@@ -74,6 +71,10 @@ export class DioramsModule extends Module {
     const { default: mk3 } = await import('@/resources/sound/mk3.mp3');
     const { default: backGroundMk3 } = await import('@/resources/img/background-mk3.gif');
     const { default: fightImg } = await import('@/resources/img/mk3/fight.gif');
+    const { default: cyraxDancing } = await import('@/resources/img/mk3/cyrax-dance.gif');
+    const { default: subzero }= await import("@/resources/img/mk3/subzero.gif");
+    const { default: sonya }= await import("@/resources/img/mk3/sonya.gif");
+
     this.setMusic(mk3);
     this.setBackGround(backGroundMk3);
 
