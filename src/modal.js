@@ -5,33 +5,36 @@ export class Modal {
     this.modalBody = document.querySelector('.modal__body');
     this.modalButtons = document.querySelector('.modal__buttons');
 
-    window.addEventListener('click', (event) => {
+    window.addEventListener("click", (event) => {
       if (event.target === this.modal) {
         this.close();
       }
     });
   }
 
-  open(title, content = '') {
+  open(title, content = "") {
     this.modalTitle.innerHTML = title;
     this.modalBody.innerHTML = content;
-    this.modal.classList.toggle('modal-overlay_hidden');
-    this._addButtons();
+    this.modal.classList.toggle("modal-overlay_hidden");
+    if (this.state.isQuestion) {
+    } else {
+      this._addOkBtn();
+    }
   }
 
-  _addButtons() {
-    const buttonOK = document.createElement('button');
-    buttonOK.classList.add('modal__button', 'modal__confirm-button');
-    buttonOK.textContent = 'OK';
+  _addOkBtn() {
+    const buttonOK = document.createElement("button");
+    buttonOK.classList.add("modal__button", "modal__confirm-button");
+    buttonOK.textContent = "OK";
     this.modalButtons.appendChild(buttonOK);
 
-    buttonOK.addEventListener('click', (event) => this.close());
+    buttonOK.addEventListener("click", (event) => this.close());
   }
 
   close() {
-    this.modal.classList.toggle('modal-overlay_hidden');
-    this.modalTitle.innerHTML = '';
-    this.modalBody.innerHTML = '';
+    this.modal.classList.toggle("modal-overlay_hidden");
+    this.modalTitle.innerHTML = "";
+    this.modalBody.innerHTML = "";
     this.modalButtons.replaceChildren();
   }
 }
