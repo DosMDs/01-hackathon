@@ -26,10 +26,10 @@ body {
   position: fixed;
   z-index: 1000;
   width: 250px;
-  background: #1b1a1a;
-  border-radius: 5px;
-  display: none;
+  background: var(--color-dark);
+  border-radius: var(--border-radius);
   list-style: none;
+  display: none;
 }
 
 .menu.open {
@@ -38,43 +38,35 @@ body {
 
 .timer {
   position: fixed;
-  background: #1b1a1a;
-  color: #eee;
+  background: var(--color-dark);
+  color: var(--color-light);
   padding: 10px 15px;
-  border-radius: 5px;
-  font-size: 18px;
-  font-weight: bold;
+  border-radius: var(--border-radius);
+  font: bold 18px;
 }
 
 .menu .menu-item {
   padding: 8px 10px;
   font-size: 1rem;
-  color: #eee;
+  color: var(--color-light);
   cursor: pointer;
   transition: background-color 0.2s ease-in;
   border-radius: inherit;
 }
 
 .menu .menu-item:hover {
-  background: #343434;
+  background: var(--color-hover);
 }
 
 .modal-overlay {
   position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background-color: rgb(27, 26, 26, 0.6);
+  background-color: rgb(27 26 26 / 60%);
   z-index: 1000;
-  transition: 0.2s ease;
+  transition: var(--transition-default);
   opacity: 1;
 }
 
@@ -85,29 +77,18 @@ body {
 
 .modal {
   position: relative;
-  top: 0;
   width: 50%;
-  height: fit-content;
   padding: 15px 25px;
-
-  border: 2px solid #ffffff;
-  border-radius: 5px;
-  background-color: #1b1a1a;
-  transition: 0.3s ease-in;
+  border: 2px solid #fff;
+  border-radius: var(--border-radius);
+  background: var(--color-dark);
+  transition: var(--transition-default);
 }
 
 .modal__title {
   font-size: 2rem;
   line-height: 2.5rem;
-  color: #eee;
-  margin: 0;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.modal__body {
-  color: #eee;
-  margin: 0;
+  color: var(--color-light);
   margin-bottom: 30px;
   text-align: center;
 }
@@ -116,110 +97,71 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  gap: 1rem;
 }
 
 .modal__button {
   min-width: 50px;
   cursor: pointer;
-}
-
-.modal__button:hover {
-  box-shadow: 0 0 0 1px var(--text-color);
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
 }
 
 .modal__confirm-button {
-  background-color: #eee;
-  border: 1px solid #eee;
+  background: var(--color-light);
+  border: 1px solid var(--color-light);
 }
 
 .block {
-  transition: 0.3s all ease;
+  transition: var(--transition-default);
 }
 
 .block--message {
   position: absolute;
-  display: flex;
-  padding: 10px 5px;
-  width: 350px;
-  height: auto;
-  background-color: rgba(246, 246, 246, 0.35);
-  border-radius: 5px;
+  width: 400px;
+  padding: 10px;
+  background-color: rgb(246 246 246 / 35%);
   border: 1px solid #9c9c9c;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-heavy);
+  display: flex;
+  gap: 15px;
+  height: 125px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .block--delete {
   opacity: 0;
 }
 
-/*.block__span {*/
-/*    margin: auto;*/
-/*}*/
-
-.block--message {
-  display: flex;
-  padding: 10px;
-  height: 125px;
-}
-
 .block__img {
   height: 100px;
   width: 100px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .block__vr {
-  margin: 0 15px;
   width: 1px;
-  height: 100%;
-  background-color: lightgray;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
-}
-
-.block_container {
-  height: 100%;
+  background: lightgray;
+  box-shadow: var(--shadow-heavy);
 }
 
 .block__h3 {
   font-size: 0.9rem;
-  height: 20%;
-}
-
-.block__span {
-  height: 80%;
-  text-align: left;
+  margin-bottom: 8px;
 }
 
 /* Позиции для абсолютных элементов */
 
 /* right-bottom */
-.block--rb {
-  bottom: 50px;
-  right: 50px;
-}
-
+.block--rb { bottom: 50px; right: 50px; }
 /* right-top */
-.block--rt {
-  top: 50px;
-  right: 50px;
-}
-
+.block--rt { top: 50px; right: 50px; }
 /* left-bottom */
-.block--lb {
-  bottom: 50px;
-  left: 50px;
-}
-
+.block--lb { bottom: 50px; left: 50px; }
 /* left-top */
-.block--lt {
-  top: 50px;
-  left: 50px;
-}
+.block--lt { top: 50px; left: 50px; }
 
 canvas {
   position: absolute;

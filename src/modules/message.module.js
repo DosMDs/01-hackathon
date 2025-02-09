@@ -67,14 +67,12 @@ class MessageModule extends Module {
     divSeparator.className = "block__vr";
 
     const divContainer = document.createElement("div");
-    divContainer.className = "block__container";
-
+    
     const h3Element = document.createElement("h3");
     h3Element.className = "block__h3";
     h3Element.innerText = `Вам пишет: ${obj.author}`;
 
     const spanElement = document.createElement("span");
-    spanElement.className = "block__span";
     spanElement.innerText = obj.quote;
 
     divContainer.append(h3Element, spanElement);
