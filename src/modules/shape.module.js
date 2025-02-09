@@ -42,6 +42,32 @@ class Shape {
   }
 }
 
+class Polygon extends Shape {
+  draw() {
+    this.prepareContext();
+    const n = this.state.verticesNumber;
+    const d = this.state.rotateDegree;
+    this.ctx.beginPath();
+    this.ctx.moveTo(
+      this.centerX + (this.state.newBox.w * Math.cos((d * Math.PI) / 180)) / 2,
+      this.centerY + (this.state.newBox.h * Math.sin((d * Math.PI) / 180)) / 2
+    );
+    for (let i = 1; i <= n; i += 1) {
+      this.ctx.lineTo(
+        this.centerX +
+          (this.state.newBox.w *
+            Math.cos((d * Math.PI) / 180 + (i * 2 * Math.PI) / n)) /
+            2,
+        this.centerY +
+          (this.state.newBox.h *
+            Math.sin((d * Math.PI) / 180 + (i * 2 * Math.PI) / n)) /
+            2
+      );
+    }
+    this.finalizeContext();
+  }
+}
+
 class ShapeModule extends Module {
   constructor() {
     super("shape", "Создать фигуру");
