@@ -69,7 +69,7 @@ export class DioramsModule extends Module {
 
   async playMk3() {
     const { default: mk3 } = await import('@/resources/sound/mk3.mp3');
-    const { default: backGroundMk3 } = await import('@/resources/img/background-mk3.gif');
+    const { default: backGroundMk3 } = await import('@/resources/img/background-mk3.png');
     const { default: fightImg } = await import('@/resources/img/mk3/fight.gif');
     const { default: cyraxDancing } = await import('@/resources/img/mk3/cyrax-dance.gif');
     const { default: subzero }= await import("@/resources/img/mk3/subzero.gif");
