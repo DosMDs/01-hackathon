@@ -208,13 +208,13 @@ canvas {
     border-radius: 5px;
     box-shadow: 0 0 0 2px #000,
     inset 2px 2px 0 rgba(255, 255, 255, 0.8),
-    inset -2px -2px 0 rgba(0, 0, 0, 0.5);
+    inset 2px 2px 0 rgba(0, 0, 0, 0.5);
     background: #2a2a54;
     padding: 2px;
 }
 
 .diagram-menu__button {
-    width: 50%;
+    width: 33.3%;
     border-radius: 5px;
     border: none;
     background-color: #666666;

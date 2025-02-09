@@ -38,19 +38,41 @@ export class DioramsModule extends Module {
     createMenu(diagrams) {
         const menuDiagram = document.createElement('div');
         menuDiagram.className = 'diagram-menu'
-        diagrams.forEach(diagram => {
+
+        const buttonClose = document.createElement('button');
+        buttonClose.className = 'diagram-menu__button';
+        buttonClose.dataset.action = 'reset';
+        buttonClose.innerText = 'Сбросить';
+
+        diagrams.forEach((diagram, index) => {
             const buttonElement = document.createElement('button');
             buttonElement.className = 'diagram-menu__button';
+            buttonElement.dataset.action = 'playDiagram';
             buttonElement.innerText = diagram.name;
-            buttonElement.addEventListener('click', () => {
-                this.reset()
-                diagram.method.call(this);
-            })
+            buttonElement.dataset.index = index;
 
-            menuDiagram.append(buttonElement);
-        })
+            menuDiagram.append(buttonClose, buttonElement);
+        });
 
-        document.body.append(menuDiagram)
+        menuDiagram.addEventListener('click', (event) => {
+            const button = event.target.closest('.diagram-menu__button');
+            if (!button) return;
+
+            const action = button.dataset.action;
+
+            switch (action) {
+                case 'reset':
+                    this.reset();
+                    break;
+                case 'playDiagram':
+                    const index = button.dataset.index;
+                    this.reset();
+                    diagrams[index].method.call(this);
+                    break;
+            }
+        });
+
+        document.body.append(menuDiagram);
     }
 
     playMk3() {
