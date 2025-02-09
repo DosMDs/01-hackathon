@@ -50,6 +50,10 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.mp3$/,
+          type: 'asset/resource'
+        },
+        {
           test: /\.(png|jpe?g|gif)$/i,
           use: [
             {

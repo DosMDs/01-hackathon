@@ -1,33 +1,33 @@
-import { Module } from "../core/module";
+import {Module} from '@/core/module'
 
-class RandomSoundModule extends Module {
-  constructor() {
-    super("randomSound", "Случайный звук");
-  }
+export class RandomSoundModule extends Module {
+    constructor() {
+        super("randomSound", "Случайный звук");
+    }
 
-  trigger() {
-    this.makeRandomSound();
-  }
+    trigger() {
+        this.makeRandomSound();
+    }
 
-  makeRandomSound() {
-    const playNote = (frequency) => {
-      const audioContext = new AudioContext();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
 
-      gainNode.gain.value = 0.01;
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      oscillator.frequency.value = frequency;
+    makeRandomSound() {
+        const playNote = (frequency) => {
+            const audioContext = new AudioContext();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
 
-      oscillator.start();
-      setTimeout(() => {
-        oscillator.stop();
-      }, 500);
-    };
+            gainNode.gain.value = 0.05;
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            oscillator.frequency.value = frequency;
 
-    playNote(Math.random().toString().substring(2, 5));
-  }
+
+            oscillator.start();
+            setTimeout(() => {
+                oscillator.stop();
+            }, 500);
+        };
+
+        playNote(Math.random().toString().substring(2, 5))
+    }
 }
-
-export default RandomSoundModule;
