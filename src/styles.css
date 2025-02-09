@@ -93,6 +93,12 @@ body {
   text-align: center;
 }
 
+.modal__body {
+  color: var(--color-light);
+  padding: 15px 25px;
+  text-align: center;
+}
+
 .modal__buttons {
   display: flex;
   justify-content: space-evenly;
