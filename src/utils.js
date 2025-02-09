@@ -44,6 +44,14 @@ export function createTimer(
   finalFunction = undefined,
   textContainer = undefined
 ) {
+
+  if (isNaN(time)) {
+    return;
+  } else if (time <= 0) {
+    finalFunction();
+    return;
+  }
+
   const createContainer = !textContainer;
   let timerTextContainer = textContainer;
   let timerContainer = undefined;
@@ -58,6 +66,7 @@ export function createTimer(
   }
 
   timerTextContainer.textContent = time;
+  time--;
 
   const timer = setInterval(() => {
     if (time === 0) {

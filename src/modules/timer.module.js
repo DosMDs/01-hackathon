@@ -17,10 +17,7 @@ class TimerModule extends Module {
       return;
     }
 
-    const timerContainer = document.createElement("div");
-    timerContainer.className = "timer";
-    setPositionElement(timerContainer, "rt");
-    createTimer(seconds, timerContainer, () => showModal("Время вышло!"));
+    createTimer(seconds, () => showModal("Время вышло!"));
   }
 }
 
