@@ -24,7 +24,7 @@ export default class ContextMenu extends Menu {
         this.el.style.left = `${this.state.mouseX}px`;
         this.el.style.top = `${this.state.mouseY}px`;
 
-        const modules = this.state.modules.map(module => module.toHTML()).join();
+        const modules = this.state.modules.map(module => module.toHTML()).join("");
         this.el.innerHTML = modules;
         this.el.style.display = 'block';
         this.state.isOpen = true;
