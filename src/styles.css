@@ -17,7 +17,7 @@ body {
 .menu {
     position: fixed;
     z-index: 1000;
-    width: 150px;
+    width: 250px;
     background: #1b1a1a;
     border-radius: 5px;
     display: none;
@@ -113,6 +113,97 @@ body {
     background-color: #eee;
     border: 1px solid #eee;
 }
+
+.block {
+    transition: 0.3s all ease;
+}
+
+.block--message {
+    position: absolute;
+    display: flex;
+    padding: 10px 5px;
+    width: 350px;
+    height: auto;
+    background-color: rgba(246, 246, 246, 0.35);
+    border-radius: 5px;
+    border: 1px solid #9c9c9c;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 6px 6px rgba(0, 0, 0, 0.20);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.block--delete {
+    opacity: 0;
+}
+
+/*.block__span {*/
+/*    margin: auto;*/
+/*}*/
+
+.block--message {
+    display: flex;
+    padding: 10px;
+    height: 125px;
+}
+
+.block__img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.block__vr {
+    margin: 0 15px;
+    width: 1px;
+    height: 100%;
+    background-color: lightgray;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 6px 6px rgba(0, 0, 0, 0.20);
+}
+
+.block_container {
+    height: 100%;
+}
+
+.block__h3 {
+    font-size: 0.9rem;
+    height: 20%;
+}
+
+.block__span {
+    height: 80%;
+    text-align: left;
+}
+
+/* Позиции для абсолютных элементов */
+
+/* right-bottom */
+.block--rb {
+    bottom: 50px;
+    right: 50px;
+}
+
+/* right-top */
+.block--rt {
+    top: 50px;
+    right: 50px;
+}
+
+/* left-bottom */
+.block--lb {
+    bottom: 50px;
+    left: 50px;
+}
+
+/* left-top */
+.block--lt {
+    top: 50px;
+    left: 50px;
+}
+
+
 
 canvas {
     position: absolute;
