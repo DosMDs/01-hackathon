@@ -28,6 +28,16 @@ body {
     display: block;
 }
 
+.timer {
+    position: fixed;
+    background: #1b1a1a;
+    color: #eee;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .menu .menu-item {
     padding: 8px 10px;
     font-size: 1rem;
