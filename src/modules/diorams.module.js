@@ -236,7 +236,7 @@ export class DioramsModule extends Module {
 
         const backGround = document.createElement('img');
         backGround.className = 'diagram__background'
-        backGround.style.zIndex = '-1'
+        backGround.style.zIndex = '-9999'
         backGround.src = imgSrc;
 
         this.backGround = backGround;
