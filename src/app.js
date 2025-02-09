@@ -1,5 +1,4 @@
 import ContextMenu from './menu'
-import Modal from './modal';
 import './styles.css'
 import { BackgroundModule } from './modules/background.module'
 import { TimerModule } from './modules/timer.module';
