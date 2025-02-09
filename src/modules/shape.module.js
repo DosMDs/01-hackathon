@@ -8,10 +8,11 @@ class Shape {
   }
 
   prepareContext() {
-    this.ctx.save();
     const { x0, y0, w, h } = this.state.newBox;
     this.centerX = x0 + w / 2;
     this.centerY = y0 + h / 2;
+    this.ctx.save();
+    this.ctx.beginPath();
   }
 
   finalizeContext() {
@@ -44,10 +45,9 @@ class Shape {
 
 class Polygon extends Shape {
   draw() {
-    this.prepareContext();
     const n = this.state.verticesNumber;
     const d = this.state.rotateDegree;
-    this.ctx.beginPath();
+    this.prepareContext();
     this.ctx.moveTo(
       this.centerX + (this.state.newBox.w * Math.cos((d * Math.PI) / 180)) / 2,
       this.centerY + (this.state.newBox.h * Math.sin((d * Math.PI) / 180)) / 2
@@ -64,6 +64,25 @@ class Polygon extends Shape {
             2
       );
     }
+    this.finalizeContext();
+  }
+}
+
+class Ellipse extends Shape {
+  draw() {
+    this.prepareContext();
+    const r = this.state.radiiRatio;
+    const d = this.state.rotateDegree;
+    this.ctx.beginPath();
+    this.ctx.ellipse(
+      this.centerX,
+      this.centerY,
+      w / 2,
+      (w * r) / 2,
+      (d * Math.PI) / 180,
+      0,
+      2 * Math.PI
+    );
     this.finalizeContext();
   }
 }
