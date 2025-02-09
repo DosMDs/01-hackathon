@@ -21,6 +21,7 @@ class ResetModule extends Module {
     });
     document.body.replaceChildren();
     document.body.append(...this.state.saveElements);
+    document.body.style.background = "";
   }
 }
 
