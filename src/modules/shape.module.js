@@ -38,7 +38,7 @@ class Shape {
       curColor: getRandomColor(),
       verticesNumber: random(3, 10),
       rotateDegree: random(0, 360),
-      radiiRatio: random(1, 10) / 10,
+      radiusRatio: random(1, 10) / 10,
     };
   }
 }
@@ -70,7 +70,7 @@ class Polygon extends Shape {
 
 class Ellipse extends Shape {
   draw() {
-    const r = this.state.radiiRatio;
+    const r = this.state.radiusRatio;
     const d = this.state.rotateDegree;
     this.prepareContext();
     this.ctx.ellipse(
@@ -86,6 +86,23 @@ class Ellipse extends Shape {
   }
 }
 
+class Star extends Shape {
+    draw() {
+      const n = this.state.verticesNumber;
+      const r = this.state.radiusRatio;
+      this.prepareContext()
+      this.ctx.translate(this.centerX, this.centerY);
+      this.ctx.moveTo(0, -w / 2);
+      for (let i = 0; i < n; i++) {
+        this.ctx.rotate(Math.PI / n);
+        this.ctx.lineTo(0, -((w / 2) * r));
+        this.ctx.rotate(Math.PI / n);
+        this.ctx.lineTo(0, -w / 2);
+      }
+      this.finalizeContext()
+    }
+  }
+
 class ShapeModule extends Module {
   constructor() {
     super("shape", "Создать фигуру");
@@ -100,7 +117,7 @@ class ShapeModule extends Module {
       curColor: "",
       verticesNumber: 0,
       rotateDegree: 0,
-      radiiRatio: 1,
+      radiusRatio: 1,
     };
   }
 
@@ -133,7 +150,7 @@ class ShapeModule extends Module {
     const { x0, y0, w, h } = this.state.newBox;
     const x_c = x0 + w / 2;
     const y_c = y0 + h / 2;
-    const r = this.state.radiiRatio;
+    const r = this.state.radiusRatio;
     const d = this.state.rotateDegree;
     this.ctx.beginPath();
     this.ctx.ellipse(
@@ -157,7 +174,7 @@ class ShapeModule extends Module {
     const x_c = x0 + w / 2;
     const y_c = y0 + h / 2;
     const n = this.state.verticesNumber;
-    const r = this.state.radiiRatio;
+    const r = this.state.radiusRatio;
     this.ctx.beginPath();
     this.ctx.translate(x_c, y_c);
     this.ctx.moveTo(0, -w / 2);
@@ -183,7 +200,7 @@ class ShapeModule extends Module {
     this.state.curColor = getRandomColor();
     this.state.verticesNumber = random(3, 10);
     this.state.rotateDegree = random(0, 360);
-    this.state.radiiRatio = random(1, 10) / 10;
+    this.state.radiusRatio = random(1, 10) / 10;
   }
 
   trigger() {
