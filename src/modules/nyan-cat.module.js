@@ -31,12 +31,12 @@ export class NyanCatModule extends Module {
 
     trigger() {
         this.createMenu(this.diagrams);
+        this.playMk3();
     }
 
     createMenu(diagrams) {
         const menuDiagram = document.createElement('div');
         menuDiagram.className = 'diagram-menu'
-
         diagrams.forEach(diagram => {
             const buttonElement = document.createElement('button');
             buttonElement.className = 'diagram-menu__button';
@@ -44,7 +44,6 @@ export class NyanCatModule extends Module {
             buttonElement.addEventListener('click', () => {
                 this.reset()
                 diagram.method.call(this);
-                // buttonElement.disabled = true;
             })
 
             menuDiagram.append(buttonElement);
@@ -78,7 +77,7 @@ export class NyanCatModule extends Module {
         let movingCat = null;
         let rainbow = null;
         movingCat = setInterval(() => {
-            if(!document.contains(nyanCatElement)) {
+            if (!document.contains(nyanCatElement)) {
                 movingCat.clearInterval();
                 rainbow.clearInterval();
             }
@@ -184,6 +183,8 @@ export class NyanCatModule extends Module {
         backGround.style.width = '100%';
         backGround.style.height = '100%';
         backGround.style.zIndex = '-1';
+        backGround.style.clipPath = 'inset(5px)'
+        backGround.style.scale = '0.9'
         backGround.src = imgSrc;
 
         this.backGround = backGround;
