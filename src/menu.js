@@ -61,6 +61,10 @@ export default class ContextMenu extends Menu {
         this.state.modules.push(newModule);
     }
 
+    get modules(){
+        return this.state.modules;
+    }
+
     contextmenuHeandler(event) {
         event.preventDefault();
         this.state.mouseX = event.clientX;

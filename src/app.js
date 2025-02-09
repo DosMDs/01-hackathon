@@ -18,4 +18,4 @@ contextMenu.add(new ClicksModule());
 contextMenu.add(new MessageModule());
 contextMenu.add(new DioramsModule());
 
-contextMenu.add(new ResetModule());
+contextMenu.add(new ResetModule(contextMenu));
